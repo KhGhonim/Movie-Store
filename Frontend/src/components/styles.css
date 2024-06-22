@@ -1,0 +1,53 @@
+
+.swiper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Ensure no overflow */
+
+}
+
+.swiper-slide {
+  text-align: center;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* Customize pagination bullets */
+.swiper-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Adjust gap between bullets */
+  padding-top: 20px;
+  padding-bottom: 200px;
+}
+
+.swiper-pagination .swiper-pagination-bullet {
+  width: 150px;
+  height: 100px;
+  padding: 20px;
+  border-radius: 35px; /* Remove rounded corners */
+  object-fit: contain; /* Ensure images cover the bullet area */
+}
+
+.swiper-pagination .swiper-pagination-bullet-active {
+  border-bottom: 3px solid #fe0202; /* Add border to active bullet */
+  background-color: transparent;
+}
+
+/* Additional styling for custom bullets */
+.custom-bullet {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
