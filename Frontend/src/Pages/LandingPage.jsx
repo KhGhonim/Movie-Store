@@ -1,5 +1,5 @@
 import Testimonials from "../components/SecoundCrosuel";
-import Banner from "../components/Banner";
+import Banner from "../components/FristCrousel";
 import Footer from "../components/Footer";
 import HeroSection from "../components/HeroSection";
 import Navbar from "../components/Navbar";

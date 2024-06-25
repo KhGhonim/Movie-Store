@@ -7,6 +7,8 @@ import Close from "../assets/cross.png";
 // @ts-ignore
 import search from "../assets/search.png";
 // @ts-ignore
+import SearchBar from "../assets/searchbar.png";
+// @ts-ignore
 import house from "../assets/house.png";
 // @ts-ignore
 import BestChoice from "../assets/best-choice.png";
@@ -33,6 +35,8 @@ export default function Navbar() {
   const [MenuPosition, setMenuPosition] = useState("");
   const [Model, setModel] = useState("hidden");
   const [SignUpModel, setSignUpModel] = useState("hidden");
+  const [isExpanded, setIsExpanded] = useState(false);
+
   /**
    Sets the state of the Sign In Model to "hidden", closing the modal.
    */
@@ -149,9 +153,9 @@ export default function Navbar() {
                 href="/"
               >
                 <h1>
-                  KG Book
+                  KG 
                   <span className="text-red-500 ml-2">
-                    and Movie Store
+                     Movie Store
                   </span>{" "}
                 </h1>
               </a>
@@ -181,21 +185,32 @@ export default function Navbar() {
                   </li>
 
                   <li>
-                    <a
-                      className="text-white transition hover:text-red-500 font-semibold text-lg"
-                      href="#"
-                    >
-                      Books
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      className="text-white transition hover:text-red-500 font-semibold text-lg"
-                      href="#"
-                    >
-                      Best Sellers
-                    </a>
+                    <div className="relative flex items-center">
+                      <input
+                        type="text"
+                        name="search"
+                        id="search"
+                        className={`w-0 transition-all duration-300 ease-in-out border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500 ${
+                          isExpanded
+                            ? "w-[200px] pl-10 pr-4 py-2"
+                            : "w-0 p-0 overflow-hidden"
+                        }`}
+                        placeholder="Search..."
+                        onFocus={() => setIsExpanded(true)}
+                        onBlur={() => setIsExpanded(false)}
+                      />
+                      <button
+                        className="absolute left-1 top-1/2 transform -translate-y-1/2 border border-transparent p-1 bg-transparent hover:bg-gray-50 rounded-lg"
+                        aria-label="Search"
+                        onClick={() => setIsExpanded(true)}
+                      >
+                        <img
+                          src={SearchBar} // Make sure SearchBarIcon is a valid import or URL
+                          alt="Search"
+                          className="w-6 h-6"
+                        />
+                      </button>
+                    </div>
                   </li>
                 </ul>
               </nav>

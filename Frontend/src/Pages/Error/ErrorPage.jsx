@@ -9,6 +9,9 @@ export default function ErrorPage() {
           HomePage
         </Link>
       </h1>
+
+
+      
     </div>
   );
 }

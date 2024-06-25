@@ -40,6 +40,7 @@ export default function SignIn({ Model, ModelCloser, SignUpDirection }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+           
         },
         body: JSON.stringify(formData),
       });
@@ -82,7 +83,7 @@ export default function SignIn({ Model, ModelCloser, SignUpDirection }) {
       >
         <div className="relative p-4 w-full max-w-md max-h-full" ref={ref}>
           {/* Modal content */}
-          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div className="relative bg-white rounded-xl shadow dark:bg-gray-700">
             {/* Modal header */}
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">

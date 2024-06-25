@@ -12,8 +12,8 @@
   --background-color: rgb(255, 255, 255);
   --background-Card-Color: rgb(110, 199, 180);
   --background-Card-log: rgb(133, 133, 133);
-
-
+  --background-Search: rgb(197, 199, 211);
+  --background-Card-Search: rgb(32,35,55);
 }
 
 /* Dark Mode Variables */
@@ -24,6 +24,8 @@
   --background-Menu: rgb(29, 18, 46);  /* Darker yellow for hovered buttons */
   --background-color: rgb(48, 10, 109);
   --background-Card-log: rgb(91 33 182);
+  --background-Card-Search: rgb(32,35,55);
+  --background-Search: rgb(12,15,33);
 }
 
 

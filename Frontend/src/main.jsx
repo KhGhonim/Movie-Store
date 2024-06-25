@@ -15,6 +15,8 @@ import AddMovie from "./Pages/AddMovie.jsx/AddMovie.jsx";
 import ErrorPage from "./Pages/Error/ErrorPage.jsx";
 import SignIn from "./Pages/Auth/SignIn/SignIn.jsx";
 import SignUp from "./Pages/Auth/SignUp/SignUp.jsx";
+import DescriptionPage from "../src/components/DescriptionPage/DescriptionPage.jsx";
+import CatagoryPage from "../src/components/CatagoryPage/CatagoryPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +25,8 @@ const router = createBrowserRouter(
       <Route path="/AddMovie" element={<AddMovie />} />
       <Route path="/SignUp" element={<SignUp />} />
       <Route path="/SignIn" element={<SignIn  />} />
+      <Route path="/movies/:movieId" element={<DescriptionPage  />} />
+      <Route path="/catagories/:movieId" element={<CatagoryPage  />} />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )

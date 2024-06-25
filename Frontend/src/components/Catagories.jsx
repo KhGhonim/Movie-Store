@@ -16,7 +16,7 @@ export default function TopBooks() {
         </div>
 
         <div className="flex flex-wrap justify-around items-center max-sm:flex-col z-50 ">
-          <Link to={"/Netflix"}>
+          <Link to={"/catagories/Netflix"}>
             <div className="text-center text-base font-bold md:text-3xl text-[--text-color] h-36 w-64 flex justify-center items-center bg-[--background-color] mt-6 back-gradient rounded-2xl hover:scale-110 transition-transform duration-200 ease-in-out ">
               <img
                 width={150}
@@ -26,7 +26,7 @@ export default function TopBooks() {
               />
             </div>
           </Link>
-          <Link to={"/Marvel"}>
+          <Link to={"/catagories/Marvel"}>
             <div className="text-center text-base font-bold md:text-3xl text-[--text-color]  h-36 w-64 flex justify-center items-center bg-[--background-color] mt-6 back-gradient rounded-2xl hover:scale-110 transition-transform duration-200 ease-in-out">
               <img
                 width={150}
@@ -36,7 +36,7 @@ export default function TopBooks() {
               />
             </div>
           </Link>
-          <Link to={"/DC"}>
+          <Link to={"/catagories/DC"}>
             <div className="text-center text-base font-bold md:text-3xl text-[--text-color] h-36 w-64 flex justify-center items-center bg-[--background-color] back-gradient mt-6 rounded-2xl hover:scale-110 transition-transform duration-200 ease-in-out">
               <img
                 style={{ width: "150px", height: "100px", objectFit: "cover" }}
@@ -45,7 +45,7 @@ export default function TopBooks() {
               />
             </div>
           </Link>
-          <Link to={"/Ramazan"}>
+          <Link to={"/catagories/Ramazan"}>
             <div className="text-center text-base font-bold md:text-3xl text-[--text-color] h-36 w-64 flex justify-center items-center bg-[--background-color] back-gradient mt-6 max-sm:mb-16 rounded-2xl hover:scale-110 transition-transform duration-200 ease-in-out">
               <img
                 width={150}
