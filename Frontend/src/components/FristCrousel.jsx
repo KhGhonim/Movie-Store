@@ -1,5 +1,6 @@
 import Crousel from "./SharedCrousel";
 import { useEffect, useState } from "react";
+
 export default function FristCrousel() {
   const [Data, setData] = useState(null);
 
@@ -34,7 +35,7 @@ export default function FristCrousel() {
           <h1 className="text-5xl font-bold ">Movie Store</h1>
           <p className="py-6">Find your next adventure</p>
         </div>
-        <Crousel result={Data} />
+        <Crousel result={Data} Page={"movies"} />
       </div>
     </div>
   );

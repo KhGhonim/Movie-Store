@@ -7,7 +7,15 @@ import PropTypes from "prop-types";
 // @ts-ignore
 import Starts from "../assets/stars.png";
 
-export default function Crousel({ result }) {
+Crousel.propTypes = {
+  result: PropTypes.array.isRequired,
+};
+Crousel.propTypes = {
+  Page: PropTypes.string.isRequired,
+};
+
+
+export default function Crousel({ result, Page }) {
   if (!result || result.length === 0) {
     return (
       <Swiper
@@ -81,7 +89,7 @@ export default function Crousel({ result }) {
                 key={results.backdrop_path}
               >
                 <div className=" relative w-72 max-sm:w-52 max-md:w-60 h-full mx-4 hover:scale-105 duration-300 cursor-pointer my-20 ">
-                  <Link to={`/movies/${results.id}`} className="w-full h-full ">
+                  <Link to={`/${Page}/${results.id}`} className="w-full h-full ">
                     <div className="absolute inset-0 bg-black opacity-0 hover:opacity-70 transition-opacity duration-300 ease-in-out rounded-2xl">
                       <p className="text-2xl max-sm:text-base  font-bold text-center mt-16 text-[#fff]">
                         {results.title || results.original_name}
@@ -138,6 +146,3 @@ export default function Crousel({ result }) {
   );
 }
 
-Crousel.propTypes = {
-  result: PropTypes.array.isRequired,
-};

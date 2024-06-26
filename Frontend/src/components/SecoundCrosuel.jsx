@@ -26,8 +26,6 @@ export default function Testimonials() {
 
     fetchTrending();
   }, []);
-
-  console.log(Data);
   
   return (
     <div className="relative h-full   ">
@@ -35,7 +33,7 @@ export default function Testimonials() {
         <div className="text-center ">
           <h1 className="text-5xl font-bold ">Series Store</h1>
         </div>
-        <Crousel result={Data} />
+        <Crousel result={Data} Page={"tv"} />
       </div>
     </div>
   );

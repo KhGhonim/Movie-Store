@@ -1,5 +1,5 @@
 import Navbar from "../../components/Navbar";
-import { useEffect,  useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 // @ts-ignore
 import Marvel from "../../../src/assets/Movies/Marvel.jpeg";
@@ -11,14 +11,13 @@ import Netflix from "../../../src/assets/Movies/Netflix.jpg";
 import Arabic from "../../../src/assets/Movies/Arabic.png";
 // @ts-ignore
 import Drawer from "./Drawer";
+import CatagoryCard from "./CatagoryCard";
 
 export default function CatagoryPage() {
-  const [CatagoryData, setCatagoryData] = useState();
+  const [CatagoryData, setCatagoryData] = useState(null);
   const { movieId } = useParams();
-  const [Postetr, setPostetr] = useState(movieId);
-
+  const [Poster, setPoster] = useState(movieId);
   // {Change Between True and False}
-
 
   useEffect(() => {
     const options = {
@@ -48,21 +47,23 @@ export default function CatagoryPage() {
 
   useEffect(() => {
     if (movieId === "Marvel") {
-      setPostetr(Marvel);
+      setPoster(Marvel);
     } else if (movieId === "DC") {
-      setPostetr(DC);
+      setPoster(DC);
     } else if (movieId === "Netflix") {
-      setPostetr(Netflix);
-    } else if (movieId === "Ramazan") {
-      setPostetr(Arabic);
+      setPoster(Netflix);
+    } else if (movieId === "Arabic") {
+      setPoster(Arabic);
     }
   }, [movieId]);
+
+  console.log(CatagoryData);
 
   // @ts-ignore
   if (!CatagoryData || CatagoryData.length === 0) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600"></div>
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin bg-[--background-color]"></div>
       </div>
     );
   }
@@ -70,16 +71,35 @@ export default function CatagoryPage() {
   return (
     <div>
       <Navbar />
-      <main className="min-h-screen w-full bg-[--background-color]">
-        <div className="w-full h-dvh  ">
+      <main className="min-h-full w-full bg-[--background-color] relative">
+        <div className="fixed inset-0 z-0">
           <img
-            src={Postetr}
+            src={Poster}
             alt="Marvel-Cinematic-Universe"
-            className="w-full h-full object-cover "
+            className="w-full min-h-full object-cover object-center"
           />
         </div>
-        <div className="w-full h-full bg-black bg-opacity-80  absolute inset-0  ">
-          <Drawer  />
+
+        <div className="relative bg-black bg-opacity-80 w-full min-h-full z-20">
+          <div className="w-full text-center pt-24 flex justify-center items-center">
+            <h1 className="text-2xl md:text-5xl font-bold text-white">
+              Welcome To{" "}
+              <span className="text-[--text-colorForCatagory]">{movieId}</span>{" "}
+              Gate
+            </h1>
+            <img
+              width={50}
+              src="https://em-content.zobj.net/source/animated-noto-color-emoji/356/fire_1f525.gif"
+              alt=""
+              className="block max-sm:hidden animate-bounce"
+            />
+          </div>
+
+          <CatagoryCard CatagoryData={CatagoryData} />
+
+          <div className="fixed bottom-0 left-0 ">
+            <Drawer />
+          </div>
         </div>
       </main>
     </div>

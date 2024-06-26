@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 // @ts-ignore
 import Stars from "../../assets/stars.png";
 import { FaArrowLeft } from "react-icons/fa";
@@ -9,6 +10,7 @@ export default function Drawer() {
   const [Year, setYear] = useState(null);
   const [Rate, setRate] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+  let [searchParams, setSearchParams] = useSearchParams("");
 
   const ref = useRef(null);
   const CloseDrawer = useRef(true);
@@ -19,17 +21,37 @@ export default function Drawer() {
 
   const handleType = (value) => {
     setType(value);
+    setSearchParams((prevParams) => {
+      const newParams = new URLSearchParams(prevParams);
+      newParams.set("type", value);
+      return newParams;
+    });
   };
 
   const handleLanguge = (value) => {
     setLanguge(value);
+    setSearchParams((prevParams) => {
+      const newParams = new URLSearchParams(prevParams);
+      newParams.set("language", value);
+      return newParams;
+    });
   };
   const handleLYear = (value) => {
     setYear(value);
+    setSearchParams((prevParams) => {
+      const newParams = new URLSearchParams(prevParams);
+      newParams.set("year", value);
+      return newParams;
+    });
   };
 
   const handleRate = (value) => {
     setRate(value);
+    setSearchParams((prevParams) => {
+      const newParams = new URLSearchParams(prevParams);
+      newParams.set("rate", value);
+      return newParams;
+    });
   };
 
   useEffect(() => {
@@ -54,13 +76,36 @@ export default function Drawer() {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 20 }, (_, index) => currentYear - index);
 
+  const handleSearch = (eo) => {
+    eo.preventDefault();
+    if (Type) {
+      searchParams.set("Type", Type);
+    } else {
+      searchParams.delete("Type");
+    }
+    if (Languge) {
+      searchParams.set("Languge", Languge);
+    } else {
+      searchParams.delete("Languge");
+    }
+    if (Year) {
+      searchParams.set("Year", Year);
+    } else {
+      searchParams.delete("Year");
+    }
+    if (Rate) {
+      searchParams.set("Rate", Rate);
+    } else {
+      searchParams.delete("Rate");
+    }
+  };
   return (
     <div>
       {CloseDrawer ? (
         <aside
-          className={`relative block transition-transform duration-300 ease-in-out ${
+          className={` fixed inset-y-0  block transition-transform duration-300 ease-in-out ${
             isDrawerOpen ? "translate-x-0" : "-translate-x-full"
-          }  p-5 w-72 h-dvh  bg-[--background-Search]   rounded-2xl`}
+          }  p-5 w-64 md:w-80 h-dvh  bg-[--background-Search]   rounded-2xl`}
           ref={ref}
         >
           {/* Drawer Handle */}
@@ -73,7 +118,7 @@ export default function Drawer() {
             </div>
           </div>
 
-          <nav className="space-y-8 text-sm pt-20">
+          <form onSubmit={handleSearch} className="space-y-8 text-sm pt-20">
             <div className="space-y-2 ">
               <h2 className="text-sm font-semibold tracking-widest uppercase text-[--text-color] text-center mb-4">
                 Choose What you Like
@@ -248,7 +293,7 @@ export default function Drawer() {
                 </div>
               </div>
             </div>
-          </nav>
+          </form>
         </aside>
       ) : null}
     </div>

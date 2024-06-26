@@ -15,8 +15,12 @@ import AddMovie from "./Pages/AddMovie.jsx/AddMovie.jsx";
 import ErrorPage from "./Pages/Error/ErrorPage.jsx";
 import SignIn from "./Pages/Auth/SignIn/SignIn.jsx";
 import SignUp from "./Pages/Auth/SignUp/SignUp.jsx";
-import DescriptionPage from "../src/components/DescriptionPage/DescriptionPage.jsx";
+
 import CatagoryPage from "../src/components/CatagoryPage/CatagoryPage.jsx";
+import MovieDescriptionPage from "../src/components/DescriptionPages/MovieDescriptionPage.jsx";
+import TVDescriptionPage from "../src/components/DescriptionPages/TVDescriptionPage.jsx";
+import TrendingPage from "../src/components/TrendingPage.jsx";
+import CatagoryDescription from "../src/components/CatagoryPage/CatagoryDescription.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,8 +29,11 @@ const router = createBrowserRouter(
       <Route path="/AddMovie" element={<AddMovie />} />
       <Route path="/SignUp" element={<SignUp />} />
       <Route path="/SignIn" element={<SignIn  />} />
-      <Route path="/movies/:movieId" element={<DescriptionPage  />} />
+      <Route path="/movies/:movieId" element={<MovieDescriptionPage  />} />
+      <Route path="/tv/:tvId" element={<TVDescriptionPage  />} />
       <Route path="/catagories/:movieId" element={<CatagoryPage  />} />
+      <Route path="/trending/:movieId" element={<TrendingPage  />} />
+      <Route path="/catagories/:movieId/:trending" element={<CatagoryDescription  />} />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )

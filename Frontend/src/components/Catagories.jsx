@@ -45,13 +45,13 @@ export default function TopBooks() {
               />
             </div>
           </Link>
-          <Link to={"/catagories/Ramazan"}>
+          <Link to={"/catagories/Arabic"}>
             <div className="text-center text-base font-bold md:text-3xl text-[--text-color] h-36 w-64 flex justify-center items-center bg-[--background-color] back-gradient mt-6 max-sm:mb-16 rounded-2xl hover:scale-110 transition-transform duration-200 ease-in-out">
               <img
                 width={150}
                 height={100}
                 src="../../src/assets/Movies/ibdaat.png"
-                alt="Ramazan"
+                alt="Arabic"
                 className="p-6"
               />
             </div>

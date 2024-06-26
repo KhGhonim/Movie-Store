@@ -42,6 +42,7 @@ export default function HeroSection() {
       </div>
     );
   }
+
   /**
    * Truncates a given text to a maximum length and adds ellipsis if necessary.
    */
@@ -54,6 +55,7 @@ export default function HeroSection() {
     // Return the original text if it is not longer than the maximum length
     return text;
   };
+
 
   return (
     <div className="relative   bg-gray-900  !overflow-hidden ">
@@ -68,7 +70,7 @@ export default function HeroSection() {
         pagination={{
           clickable: true,
           renderBullet: (index, className) => {
-            const posterUrl = `https://image.tmdb.org/t/p/w92${Data[index].poster_path}`;
+            const posterUrl = `https://image.tmdb.org/t/p/original${Data[index].poster_path}`;
 
             return `<img class=" !hidden lg:!block ${className}  custom-bullet   " src="${posterUrl}" alt="pagination-${
               index + 1
@@ -97,7 +99,7 @@ export default function HeroSection() {
                 </p>
                 {item.overview.length > 100 && (
                   <Link
-                    to={`/movies/${item.id}`}
+                    to={`/trending/${item.id}`}
                     className="text-blue-500 hover:text-blue-700"
                   >
                     Show more
@@ -112,7 +114,7 @@ export default function HeroSection() {
                   </button>
                 </div>
                 <Link
-                  to={`/movies/${item.id}`}
+                  to={`/trending/${item.id}`}
                   className="relative flex justify-center items-center border border-gray-200 p-3 m-3 rounded-3xl cursor-pointer bg-red-600 transition duration-700 ease-in-out hover:bg-red-900 text-white gap-2 "
                 >
                   <button className="">Watch and download</button>
@@ -151,6 +153,44 @@ export default function HeroSection() {
               src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
               alt={`Slide ${index + 1}`}
             />
+            <div className="absolute top-80 left-5 z-40 opacity-50 hover:opacity-100 transition-opacity duration-500">
+              <div className="bg-black bg-opacity-50 text-white rounded-3xl p-3  mb-3 ">
+                <h4 className="text-xl font-bold mb-2 sm:mb-3">
+                  {item.title || item.original_name}
+                </h4>
+                <p className="text-sm mb-2 ">
+                  {truncateText(item.overview, 150)}
+                </p>
+                {item.overview.length > 100 && (
+                  <Link
+                  to={`/trending/${item.id}`}
+                  className="text-blue-500 hover:text-blue-700"
+                  >
+                    Show more
+                  </Link>
+                )}
+              </div>
+
+              <div className="flex flex-col  justify-center items-center space-y-3">
+                <div className="button-container relative inline-block">
+                  <button className="border border-gray-200 p-2  rounded-3xl cursor-pointer bg-transparent backdrop-blur-sm text-white">
+                    Add to your FAV
+                  </button>
+                </div>
+                <Link
+                    to={`/trending/${item.id}`}
+                    className="flex justify-center items-center border border-gray-200 p-2  rounded-3xl cursor-pointer bg-red-600 transition duration-700 ease-in-out hover:bg-red-900 text-white space-x-2"
+                >
+                  <button>Watch and download</button>
+                  <img
+                    src="../../src/assets/video-file.png"
+                    className="!w-5 h-5"
+                    alt="Video File"
+                  />
+                </Link>
+              </div>
+            </div>
+
             <div className="gradient-overlay"></div>
           </SwiperSlide>
         ))}

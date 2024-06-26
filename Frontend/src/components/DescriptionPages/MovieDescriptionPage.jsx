@@ -1,11 +1,11 @@
 import Navbar from "../Navbar";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ThemePage from "./ThemePage";
 
-export default function DescriptionPage() {
+export default function MovieDescriptionPage() {
   const [Description, setDescription] = useState(null);
   const { movieId } = useParams();
-
   useEffect(() => {
     const options = {
       method: "GET",
@@ -19,11 +19,11 @@ export default function DescriptionPage() {
     const DataFetching = async () => {
       try {
         await fetch(
-          `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+          `https://api.themoviedb.org/3/movie/${movieId}`,
           options
         )
           .then((response) => response.json())
-          .then((response) => setDescription(response.results))
+          .then((response) => setDescription(response))
           .catch((err) => console.error(err));
       } catch (error) {
         console.log(error.message);
@@ -43,10 +43,7 @@ export default function DescriptionPage() {
   return (
     <div>
       <Navbar />
-      <main className="min-h-screen w-full bg-[--background-color]">
-        <h1>Catagories Page</h1>
-      </main>
-
+      <ThemePage result={Description} />
     </div>
   );
 }
