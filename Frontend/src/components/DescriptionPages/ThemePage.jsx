@@ -8,8 +8,8 @@ export default function ThemePage({ result }) {
     ? new Date(result.first_air_date).getFullYear()
     : null;
   return (
-    <main className="h-full w-full bg-[--background-color]">
-      <div className="relative bg-cover bg-no-repeat h-screen ">
+    <main className="h-full w-full bg-[--background-color] ">
+      <div className="relative bg-cover bg-no-repeat h-screen  ">
         <img
           src={`https://image.tmdb.org/t/p/original${
             result.poster_path || result.backdrop_path
@@ -22,7 +22,7 @@ export default function ThemePage({ result }) {
 
         <div className=" md:hidden w-1/2 py-30">
             <img
-              className="rounded-lg shadow-lg w-72  object-cover"
+              className="rounded-lg shadow-lg w-72  object-cover "
               src={`https://image.tmdb.org/t/p/original${
                 result.poster_path || result.backdrop_path
               }`}

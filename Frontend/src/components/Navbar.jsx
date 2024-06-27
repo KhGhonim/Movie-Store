@@ -5,10 +5,6 @@ import menubar from "../assets/menu-bar.png";
 // @ts-ignore
 import Close from "../assets/cross.png";
 // @ts-ignore
-import search from "../assets/search.png";
-// @ts-ignore
-import SearchBar from "../assets/searchbar.png";
-// @ts-ignore
 import house from "../assets/house.png";
 
 // @ts-ignore
@@ -28,13 +24,13 @@ import DarkMode from "./DarkMode";
 import AddProduct from "../assets/add-to-cart.png";
 import SignIn from "../Pages/Auth/SignIn/SignIn";
 import SignUp from "../Pages/Auth/SignUp/SignUp";
+import Search from "./Search";
 
 export default function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const [MenuPosition, setMenuPosition] = useState("");
   const [Model, setModel] = useState("hidden");
   const [SignUpModel, setSignUpModel] = useState("hidden");
-  const [isExpanded, setIsExpanded] = useState(false);
 
   /**
    Sets the state of the Sign In Model to "hidden", closing the modal.
@@ -182,32 +178,7 @@ export default function Navbar() {
                   </li>
 
                   <li>
-                    <div className="relative flex items-center">
-                      <input
-                        type="text"
-                        name="search"
-                        id="search"
-                        className={`w-0 transition-all duration-300 ease-in-out border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500 ${
-                          isExpanded
-                            ? "w-[200px] pl-10 pr-4 py-2"
-                            : "w-0 p-0 overflow-hidden"
-                        }`}
-                        placeholder="Search..."
-                        onFocus={() => setIsExpanded(true)}
-                        onBlur={() => setIsExpanded(false)}
-                      />
-                      <button
-                        className="absolute left-1 top-1/2 transform -translate-y-1/2 border border-transparent p-1 bg-transparent hover:bg-gray-50 rounded-lg"
-                        aria-label="Search"
-                        onClick={() => setIsExpanded(true)}
-                      >
-                        <img
-                          src={SearchBar} // Make sure SearchBarIcon is a valid import or URL
-                          alt="Search"
-                          className="w-6 h-6"
-                        />
-                      </button>
-                    </div>
+    <Search/>
                   </li>
                 </ul>
               </nav>
@@ -288,7 +259,8 @@ export default function Navbar() {
                             className="p-2"
                           />
                         </div>
-                        <div className="relative">
+
+                        {/* <div className="relative">
                           <span className="absolute inset-y-0 left-0 flex items-center py-4">
                             <img
                               width={35}
@@ -301,9 +273,10 @@ export default function Navbar() {
                             type="search"
                             name="Search"
                             placeholder="Search..."
-                            className="w-full py-2 pl-10 text-sm dark:border- rounded-md focus:outline-none dark:bg-gray-100 dark:text-gray-800 focus:dark:bg-gray-50"
+                            className="w-full py-2 pl-10 text-sm rounded-md focus:outline-none"
                           />
-                        </div>
+                        </div> */}
+                      <Search/>
                         <div className="flex-1">
                           <ul className="pt-2 pb-4 space-y-1 text-sm">
                             <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
@@ -315,7 +288,7 @@ export default function Navbar() {
                                 <img
                                   width={25}
                                   src={AddProduct}
-                                  alt="Search"
+                                  alt="AddProduct"
                                   className=" "
                                 />
                                 <span>Add Product</span>
@@ -331,7 +304,7 @@ export default function Navbar() {
                                 <img
                                   width={25}
                                   src={house}
-                                  alt="Search"
+                                  alt="Home"
                                   className=" "
                                 />
                                 <span>Home</span>
@@ -346,7 +319,7 @@ export default function Navbar() {
                                 <img
                                   width={25}
                                   src={Movie}
-                                  alt="Search"
+                                  alt="Movies"
                                   className=" "
                                 />
 
@@ -362,7 +335,7 @@ export default function Navbar() {
                                 <img
                                   width={25}
                                   src={Series}
-                                  alt="Search"
+                                  alt="Series"
                                   className=" "
                                 />
 
