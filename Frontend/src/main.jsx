@@ -21,12 +21,16 @@ import MovieDescriptionPage from "../src/components/DescriptionPages/MovieDescri
 import TVDescriptionPage from "../src/components/DescriptionPages/TVDescriptionPage.jsx";
 import TrendingPage from "../src/components/TrendingPage.jsx";
 import CatagoryDescription from "../src/components/CatagoryPage/CatagoryDescription.jsx";
+import DiscoverMovies from "../src/Pages/Discover/DiscoverMovies.jsx";
+import DiscoverSeries from "../src/Pages/Discover/DiscoverSeries.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<LandingPage />} />
       <Route path="/AddMovie" element={<AddMovie />} />
+      <Route path="/DiscoverMovies" element={<DiscoverMovies />} />
+      <Route path="/DiscoverSeries" element={<DiscoverSeries />} />
       <Route path="/SignUp" element={<SignUp />} />
       <Route path="/SignIn" element={<SignIn  />} />
       <Route path="/movies/:movieId" element={<MovieDescriptionPage  />} />

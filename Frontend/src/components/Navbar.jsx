@@ -10,12 +10,11 @@ import search from "../assets/search.png";
 import SearchBar from "../assets/searchbar.png";
 // @ts-ignore
 import house from "../assets/house.png";
-// @ts-ignore
-import BestChoice from "../assets/best-choice.png";
+
 // @ts-ignore
 import Series from "../assets/drama.png";
 // @ts-ignore
-import Books from "../assets/stack-of-books.png";
+import application from "../assets/application.png";
 // @ts-ignore
 import Movie from "../assets/watching-a-movie.png";
 // @ts-ignore
@@ -132,7 +131,7 @@ export default function Navbar() {
 
   return (
     <div className=" relative  ">
-      <header className="bg-transparent absolute top-2 left-0 w-full z-50  px-4 sm:px-6 lg:px-8">
+      <header className="bg-transparent absolute top-2 left-0 w-full z-50  px-4 sm:px-6 lg:px-8 shadow-2xl">
         <div className="">
           <div className="flex h-16 items-center justify-between">
             {/* logo */}
@@ -153,10 +152,8 @@ export default function Navbar() {
                 href="/"
               >
                 <h1>
-                  KG 
-                  <span className="text-red-500 ml-2">
-                     Movie Store
-                  </span>{" "}
+                  KG
+                  <span className="text-red-500 ml-2">Movie Store</span>{" "}
                 </h1>
               </a>
             </div>
@@ -168,19 +165,19 @@ export default function Navbar() {
                 <ul className="flex items-center gap-6 text-sm">
                   <li>
                     <a
-                      className="text-white transition hover:text-red-500 font-semibold text-lg"
-                      href="#"
+                      className="text-white  hover:text-red-500 transition-all duration-500 ease-out font-semibold text-lg"
+                      href="/DiscoverMovies"
                     >
-                      Movies
+                      Filtered Movies
                     </a>
                   </li>
 
                   <li>
                     <a
-                      className="text-white transition hover:text-red-500 font-semibold text-lg"
-                      href="#"
+                      className="text-white  hover:text-red-500 transition-all duration-500 ease-out font-semibold text-lg"
+                      href="/DiscoverSeries"
                     >
-                      Series
+                      Filtered Series
                     </a>
                   </li>
 
@@ -328,7 +325,7 @@ export default function Navbar() {
                             <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
                               <a
                                 rel="noopener noreferrer"
-                                href="#"
+                                href="/"
                                 className="flex items-center p-2 space-x-3 rounded-md  "
                               >
                                 <img
@@ -343,7 +340,7 @@ export default function Navbar() {
                             <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
                               <a
                                 rel="noopener noreferrer"
-                                href="#"
+                                href="/DiscoverMovies"
                                 className="flex items-center p-2 space-x-3 rounded-md  "
                               >
                                 <img
@@ -359,7 +356,7 @@ export default function Navbar() {
                             <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
                               <a
                                 rel="noopener noreferrer"
-                                href="#"
+                                href="/DiscoverSeries"
                                 className="flex items-center p-2 space-x-3 rounded-md  "
                               >
                                 <img
@@ -372,38 +369,78 @@ export default function Navbar() {
                                 <span>Series</span>
                               </a>
                             </li>
-                            <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
-                              <a
-                                rel="noopener noreferrer"
-                                href="#"
-                                className="flex items-center p-2 space-x-3 rounded-md  "
-                              >
-                                {" "}
-                                <img
-                                  width={25}
-                                  src={Books}
-                                  alt="Search"
-                                  className=" "
-                                />
-                                <span>Books</span>
-                              </a>
-                            </li>
-                            <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
-                              <a
-                                rel="noopener noreferrer"
-                                href="#"
-                                className="flex items-center p-2 space-x-3 rounded-md  "
-                              >
-                                <img
-                                  width={25}
-                                  src={BestChoice}
-                                  alt="Search"
-                                  className=" "
-                                />
 
-                                <span>Best Sellers</span>
-                              </a>
+                            <li>
+                              <details className="group [&_summary::-webkit-details-marker]:hidden">
+                                <summary className="flex cursor-pointer items-center justify-between  px-2 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
+                                  <div className="flex items-center gap-2">
+                                    <img
+                                      width={25}
+                                      src={application}
+                                      alt="application"
+                                      className=" "
+                                    />
+                                    <span className="text-sm font-medium">
+                                      {" "}
+                                      Catagories{" "}
+                                    </span>
+                                  </div>
+
+                                  <span className="shrink-0 transition duration-300 group-open:-rotate-180">
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="h-5 w-5"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                    >
+                                      <path
+                                        fillRule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clipRule="evenodd"
+                                      />
+                                    </svg>
+                                  </span>
+                                </summary>
+
+                                <ul className="mt-2 space-y-1 px-4">
+                                  <li>
+                                    <a
+                                      href="/catagories/Marvel"
+                                      className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                                    >
+                                      Marvel
+                                    </a>
+                                  </li>
+
+                                  <li>
+                                    <a
+                                      href="/catagories/Netflix"
+                                      className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                                    >
+                                      Netflix
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a
+                                      href="/catagories/DC"
+                                      className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                                    >
+                                      DC
+                                    </a>
+                                  </li>
+
+                                  <li>
+                                    <a
+                                      href="/catagories/Arabic"
+                                      className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                                    >
+                                      Arabic
+                                    </a>
+                                  </li>
+                                </ul>
+                              </details>
                             </li>
+
                             <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
                               <a
                                 rel="noopener noreferrer"

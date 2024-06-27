@@ -11,7 +11,7 @@ export default function LandingPage() {
   return (
     <div className=" relative bg-[--background-color] ">
       <Helmet>
-        <title>KG Book Store</title>
+        <title>KG Movie Store</title>
       </Helmet>
       <Navbar />
       <HeroSection />

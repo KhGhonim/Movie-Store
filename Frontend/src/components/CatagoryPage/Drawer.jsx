@@ -54,6 +54,8 @@ export default function Drawer() {
     });
   };
 
+
+
   useEffect(() => {
     // Event handler for clicking outside the SignUp modal
     const HandleModelCloser = (eo) => {
@@ -72,6 +74,7 @@ export default function Drawer() {
       document.removeEventListener("mousedown", HandleModelCloser);
     };
   }, []);
+
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 20 }, (_, index) => currentYear - index);

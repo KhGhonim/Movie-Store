@@ -39,7 +39,6 @@ export default function CatagoryDescription() {
     DataFetching();
   }, [trending]);
 
-  console.log(CatagoryDescriptionPage);
 
   if (!CatagoryDescriptionPage || CatagoryDescriptionPage.length === 0) {
     return (

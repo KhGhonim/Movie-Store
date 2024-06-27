@@ -103,7 +103,7 @@ export default function TrendingPage() {
         </div>
       </main> */}
 
-      <div className="relative w-full h-full md:h-dvh  overflow-hidden py-4">
+      <div className="relative w-full h-full md:h-dvh  overflow-hidden py-10">
         <img
           src={`https://image.tmdb.org/t/p/original${
             TrendingPage.poster_path || TrendingPage.backdrop_path

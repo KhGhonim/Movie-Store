@@ -89,7 +89,7 @@ export default function HeroSection() {
               alt={`Slide ${index + 1}`}
             />
 
-            <div className="absolute top-20 left-5  z-40 opacity-50 hover:opacity-100   transition-opacity duration-500">
+            <div className="absolute top-20 left-5 pt-3  z-40 opacity-50 hover:opacity-100   transition-opacity duration-500">
               <div className="bg-black bg-opacity-50 text-white rounded-3xl p-5 mb-5 w-96">
                 <h4 className="text-2xl font-bold mb-3">
                   {item.title || item.original_name}

@@ -10,7 +10,6 @@ import Netflix from "../../../src/assets/Movies/Netflix.jpg";
 // @ts-ignore
 import Arabic from "../../../src/assets/Movies/Arabic.png";
 // @ts-ignore
-import Drawer from "./Drawer";
 import CatagoryCard from "./CatagoryCard";
 
 export default function CatagoryPage() {
@@ -96,10 +95,6 @@ export default function CatagoryPage() {
           </div>
 
           <CatagoryCard CatagoryData={CatagoryData} />
-
-          <div className="fixed bottom-0 left-0 ">
-            <Drawer />
-          </div>
         </div>
       </main>
     </div>
