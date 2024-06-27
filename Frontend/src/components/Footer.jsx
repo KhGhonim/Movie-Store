@@ -1,8 +1,12 @@
+// @ts-nocheck
 import { Link } from "react-router-dom";
+import facebook from "../../src/assets/facebook.png";
+import linkedin from "../../src/assets/linkedin.png";
+import instagram from "../../src/assets/instagram.png";
 
 export default function Footer() {
   return (
-    <footer className=" px-4 divide-y dark:bg-gray-400 dark:text-gray-900 z-50">
+    <footer className=" px-4 divide-y dark:bg-gray-400 dark:text-gray-900 z-50 ">
       <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
         <div className="lg:w-1/3">
           <Link
@@ -22,8 +26,8 @@ export default function Footer() {
             </div>
             <div className="block text-white font-semibold text-sm md:text-3xl">
               <h1>
-                KG Book
-                <span className="text-red-500 ml-2">and Movie Store</span>
+                KG
+                <span className="text-red-500 ml-2"> Movie Store</span>
               </h1>
             </div>
           </Link>
@@ -104,7 +108,7 @@ export default function Footer() {
                 className="flex items-center p-1 hover:scale-110 transition-transform duration-200 ease-in-out"
               >
                 <img
-                  src="../../src/assets/facebook.png"
+                  src={facebook}
                   alt="facebook"
                   width={30}
                   className="rounded-3xl"
@@ -117,7 +121,7 @@ export default function Footer() {
                 className="flex items-center p-1 hover:scale-110 transition-transform duration-200 ease-in-out"
               >
                 <img
-                  src="../../src/assets/instagram.png"
+                  src={instagram}
                   alt="instagram"
                   width={30}
                   className="rounded-3xl"
@@ -130,7 +134,7 @@ export default function Footer() {
                 className="flex items-center p-1 hover:scale-110 transition-transform duration-200 ease-in-out"
               >
                 <img
-                  src="../../src/assets/linkedin.png"
+                  src={linkedin}
                   alt="linkedin"
                   width={30}
                   className="rounded-3xl"

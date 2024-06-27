@@ -23,6 +23,7 @@ import TrendingPage from "../src/components/TrendingPage.jsx";
 import CatagoryDescription from "../src/components/CatagoryPage/CatagoryDescription.jsx";
 import DiscoverMovies from "../src/Pages/Discover/DiscoverMovies.jsx";
 import DiscoverSeries from "../src/Pages/Discover/DiscoverSeries.jsx";
+import PersonPage from "../src/Pages/PersonPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,13 +32,17 @@ const router = createBrowserRouter(
       <Route path="/AddMovie" element={<AddMovie />} />
       <Route path="/DiscoverMovies" element={<DiscoverMovies />} />
       <Route path="/DiscoverSeries" element={<DiscoverSeries />} />
+      <Route path="PersonDiscover/:personId" element={<PersonPage />} />
       <Route path="/SignUp" element={<SignUp />} />
-      <Route path="/SignIn" element={<SignIn  />} />
-      <Route path="/movies/:movieId" element={<MovieDescriptionPage  />} />
-      <Route path="/tv/:tvId" element={<TVDescriptionPage  />} />
-      <Route path="/catagories/:movieId" element={<CatagoryPage  />} />
-      <Route path="/trending/:movieId" element={<TrendingPage  />} />
-      <Route path="/catagories/:movieId/:trending" element={<CatagoryDescription  />} />
+      <Route path="/SignIn" element={<SignIn />} />
+      <Route path="/movies/:movieId" element={<MovieDescriptionPage />} />
+      <Route path="/tv/:tvId" element={<TVDescriptionPage />} />
+      <Route path="/catagories/:movieId" element={<CatagoryPage />} />
+      <Route path="/trending/:movieId" element={<TrendingPage />} />
+      <Route
+        path="/catagories/:movieId/:trending"
+        element={<CatagoryDescription />}
+      />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )

@@ -8,7 +8,8 @@ import "./styles.css";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+// @ts-ignore
+import video from '../../src/assets/video-file.png'
 export default function HeroSection() {
   const [Data, setData] = useState([]);
   useEffect(() => {
@@ -119,7 +120,7 @@ export default function HeroSection() {
                 >
                   <button className="">Watch and download</button>
                   <img
-                    src="../../src/assets/video-file.png"
+                    src={video}
                     style={{ width: "20px", height: "20px", color: "white" }}
                     alt=""
                   />
@@ -183,7 +184,7 @@ export default function HeroSection() {
                 >
                   <button>Watch and download</button>
                   <img
-                    src="../../src/assets/video-file.png"
+                    src={video}
                     className="!w-5 h-5"
                     alt="Video File"
                   />

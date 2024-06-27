@@ -69,7 +69,7 @@ export default function CatagoryCard({ CatagoryData }) {
 
           return (
             <Link key={item.id} to={`${item.name || item.title}`}>
-              <div className="w-72 h-[500px] overflow-hidden  p-5 rounded-lg shadow-md hover:shadow-xl border hover:border-[--text-colorForCatagory] transition-all ease-in-out duration-500 dark:bg-gray-50 dark:text-gray-900 mt-5 cursor-pointer m-2">
+              <div className="w-72 h-[500px] overflow-hidden  p-5 rounded-lg shadow-md hover:shadow-xl border hover:border-[--text-colorForCatagory] transition-all ease-in-out duration-500 bg-gray-50 mt-5 cursor-pointer m-2">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${
                     item.poster_path || item.backdrop_path
@@ -98,7 +98,7 @@ export default function CatagoryCard({ CatagoryData }) {
           );
         })}
       </div>
-      <div className="items-center space-y-2 text-xs sm:space-y-0 sm:space-x-3 sm:flex py-4  justify-center ">
+      <div className="items-center space-y-2 text-xs sm:space-y-0 sm:space-x-3 sm:flex py-4  justify-center text-center ">
         <div className="space-x-1">
           <button
             onClick={handlePreviousPage}

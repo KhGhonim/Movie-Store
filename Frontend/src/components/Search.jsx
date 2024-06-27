@@ -82,7 +82,7 @@ export default function Search() {
                     ? "tv"
                     : result.media_type === "movie"
                     ? "movies"
-                    : "people"
+                    : "PersonDiscover"
                 }/${result.id}`}
                 className="flex items-center p-2 w-full border-b border-gray-700 hover:bg-[--background-color] h-32 scroll-auto"
               >
