@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 // @ts-ignore
 import Close from "../../../assets/cross.png";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../config/firebase";
 
 // eslint-disable-next-line react/prop-types
 export default function SignIn({ Model, ModelCloser, SignUpDirection }) {
   const ref = useRef(null);
-  const [email, setemail] = useState(null);
-  const [password, setpassword] = useState(null);
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
   const [loading, setloading] = useState(false);
 
   useEffect(() => {
@@ -24,7 +26,52 @@ export default function SignIn({ Model, ModelCloser, SignUpDirection }) {
     };
   }, [Model]);
 
-  const HandleSubmit = async (eo) => {
+
+  // {Signin with Nodejs and express auth}
+
+  // const HandleSubmit = async (eo) => {
+  //   eo.preventDefault();
+  //   setloading(true);
+  //   if (!email || !password) {
+  //     setloading(false);
+  //     toast.error("Please fill all the fields");
+  //     return;
+  //   }
+
+  //   const formData = { email, password };
+
+  //   try {
+  //     const response = await fetch("http://localhost:6969/api/auth/signin", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+  //     const result = await response.json();
+  //     console.log(result);
+
+  //     if (result.error) {
+  //       setloading(false);
+  //       return;
+  //     }
+
+  //     eo.target.reset();
+  //     setloading(false);
+  //     toast.success("Logged In Successfully");
+  //     ModelCloser();
+  //   } catch (error) {
+  //     console.log("Error while signing in:", error.message);
+  //     setloading(false);
+  //     toast.error("Error while signing in");
+  //   }
+
+  //   eo.target.reset();
+  //   setloading(false);
+  // };
+
+  const HandleSubmit = (eo) => {
     eo.preventDefault();
     setloading(true);
     if (!email || !password) {
@@ -33,34 +80,41 @@ export default function SignIn({ Model, ModelCloser, SignUpDirection }) {
       return;
     }
 
-    const formData = { email, password };
-
-    try {
-      const response = await fetch("http://localhost:6969/api/auth/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-           
-        },
-        body: JSON.stringify(formData),
-      });
-      const result = await response.json();
-      console.log(result);
-
-      if (result.error) {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
         setloading(false);
-        return;
-      }
+        toast.success("Logged In Successfully");
+        ModelCloser();
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        setloading(false);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        switch (errorCode) {
+          case "auth/invalid-email":
+            toast.error("Wrong Email");
+            break;
 
-      eo.target.reset();
-      setloading(false);
-      toast.success("Logged In Successfully");
-      ModelCloser();
-    } catch (error) {
-      console.log("Error while signing in:", error.message);
-      setloading(false);
-      toast.error("Error while signing in");
-    }
+          case "auth/user-not-found":
+            toast.error("Wrong Email");
+            break;
+
+          case "auth/wrong-password":
+            toast.error("Wrong Password");
+            break;
+
+          case "auth/invalid-credential":
+            toast.error("Invalid Credential!");
+            break;
+
+          case "auth/too-many-requests":
+            toast.error("Too many requests, please try aganin later");
+            break;
+        }
+      });
 
     eo.target.reset();
     setloading(false);
@@ -113,6 +167,7 @@ export default function SignIn({ Model, ModelCloser, SignUpDirection }) {
                     type="email"
                     name="email"
                     id="email"
+                    value={email}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="name@company.com"
                     required
@@ -129,6 +184,7 @@ export default function SignIn({ Model, ModelCloser, SignUpDirection }) {
                   <input
                     type="password"
                     name="password"
+                    value={password}
                     id="password"
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -169,7 +225,6 @@ export default function SignIn({ Model, ModelCloser, SignUpDirection }) {
           </div>
         </div>
       </div>
-
     </div>
   );
 }

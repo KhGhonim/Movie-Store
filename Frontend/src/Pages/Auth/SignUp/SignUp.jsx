@@ -4,6 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import Close from "../../../assets/cross.png";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../../../config/firebase";
 
 export default function SignUp({
   SignUpModelCloser,
@@ -11,13 +17,14 @@ export default function SignUp({
   SignInDirection,
   ModelOpener,
 }) {
-  const [fristname, setfirstname] = useState(null);
-  const [lastname, setlastname] = useState(null);
-  const [image, setimage] = useState(null);
-  const [email, setemail] = useState(null);
-  const [password, setpassword] = useState(null);
+  const [fristname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
+  const [image, setimage] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
   const [loading, setloading] = useState(false);
 
+  console.log(image);
   const SignUPref = useRef(null);
 
   useEffect(() => {
@@ -33,41 +40,100 @@ export default function SignUp({
     };
   }, [SignUpModel]);
 
-  const HandleSubmit = async (eo) => {
+  // {Signup with Nodejs and express auth}
+
+  // const HandleSubmit = async (eo) => {
+  //   eo.preventDefault();
+  //   setloading(true);
+  //   if (!fristname || !lastname || !email || !password) {
+  //     setloading(false);
+  //     toast.error("Please fill all the fields");
+  //     return;
+  //   }
+
+  //   const formData = new FormData();
+  //   formData.append("fristname", fristname);
+  //   formData.append("lastname", lastname);
+  //   formData.append("email", email);
+  //   formData.append("password", password);
+  //   if (image) {
+  //     formData.append("image", image); // Check if image exists before appending
+  //   }
+
+  //   try {
+  //     const response = await fetch("http://localhost:6969/api/auth/signup", {
+  //       method: "POST",
+  //       body: formData,
+  //     });
+  //     const result = await response.json();
+  //     console.log(result);
+  //     eo.target.reset();
+  //     setloading(false);
+  //     toast.success("Signed Up Successfully");
+  //     SignUpModelCloser();
+  //     ModelOpener();
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     toast.error("Error while signing up");
+  //     setloading(false);
+  //   }
+  // };
+
+  const HandleSubmit = (eo) => {
     eo.preventDefault();
     setloading(true);
-    if (!fristname || !lastname || !email || !password) {
+    if (!email || !password) {
       setloading(false);
       toast.error("Please fill all the fields");
       return;
     }
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        sendEmailVerification(auth.currentUser).then(() => {
+          //
+          toast.success("Signed Up Successfully & Email Verification sent");
+        });
+        updateProfile(auth.currentUser, {
+          displayName: fristname,
+          photoURL: image,
 
-    const formData = new FormData();
-    formData.append("fristname", fristname);
-    formData.append("lastname", lastname);
-    formData.append("email", email);
-    formData.append("password", password);
-    if (image) {
-      formData.append("image", image); // Check if image exists before appending
-    }
+        });
+        ModelOpener();
+        SignUpModelCloser();
+      })
+      .catch((error) => {
+        setloading(false);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error("Error code:", errorCode, "Error message:", errorMessage);
+        switch (errorCode) {
+          case "auth/invalid-email":
+            toast.error("Wrong Email");
+            break;
+            case "auth/weak-password":
+              toast.error("Password should be at least 6 characters");
+              break;
 
-    try {
-      const response = await fetch("http://localhost:6969/api/auth/signup", {
-        method: "POST",
-        body: formData,
+          case "auth/user-not-found":
+            toast.error("Wrong Email");
+            break;
+
+          case "auth/wrong-password":
+            toast.error("Wrong Password");
+            break;
+
+          case "auth/too-many-requests":
+            toast.error("Too many requests, please try aganin later");
+            break;
+
+
+        }
+        // ..
       });
-      const result = await response.json();
-      console.log(result);
-      eo.target.reset();
-      setloading(false);
-      toast.success("Signed Up Successfully");
-      SignUpModelCloser();
-      ModelOpener();
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error("Error while signing up");
-      setloading(false);
-    }
+    setloading(false);
+    eo.target.reset();
   };
 
   return (
@@ -111,6 +177,7 @@ export default function SignUp({
                   <input
                     type="file"
                     name="image"
+                    value={""}
                     id="image"
                     onChange={(eo) => setimage(eo.target.files[0])}
                     className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500  dark:text-white text-sm rounded-full block  p-2.5  "
@@ -126,6 +193,7 @@ export default function SignUp({
                   </label>
                   <input
                     type="text"
+                    value={fristname}
                     onChange={(eo) => setfirstname(eo.target.value)}
                     name="fristname"
                     id="fristname"
@@ -144,6 +212,7 @@ export default function SignUp({
                   <input
                     type="text"
                     name="lastname"
+                    value={lastname}
                     onChange={(eo) => setlastname(eo.target.value)}
                     id="lastname"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -161,6 +230,7 @@ export default function SignUp({
                   <input
                     type="email"
                     name="email"
+                    value={email}
                     onChange={(eo) => setemail(eo.target.value)}
                     id="SignUpemail"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -178,6 +248,7 @@ export default function SignUp({
                     type="password"
                     name="password"
                     id="SignUppassword"
+                    value={password}
                     onChange={(eo) => setpassword(eo.target.value)}
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
