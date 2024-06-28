@@ -34,7 +34,6 @@ export default function Search() {
         type="text"
         name="search"
         value={Query}
-        id="search"
         className={`w-0 max-sm:w-full max-sm:pl-10 transition-all duration-500 ease-in-out border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500 ${
           isExpanded
             ? "max-sm:w-full max-sm:py-2 max-sm:pl-10 max-sm:text-sm max-sm:rounded-md max-sm:focus:outline-none w-[300px] pl-10 pr-4 py-2"
@@ -50,7 +49,7 @@ export default function Search() {
       />
       <button
         className="absolute left-1 top-1/2 transform -translate-y-1/2 border border-transparent p-1 bg-transparent hover:bg-gray-50 rounded-lg"
-        aria-label="Search"
+        aria-label="Search Icon"
         onClick={() => setIsExpanded(true)}
       >
         <img

@@ -1,5 +1,7 @@
+// @ts-nocheck
+
 import { useEffect, useRef, useState } from "react";
-// @ts-ignore
+
 import Close from "../../../assets/cross.png";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -87,12 +89,12 @@ export default function SignIn({ Model, ModelCloser, SignUpDirection }) {
         ModelCloser();
         // Signed in
         const user = userCredential.user;
+        console.log(user);
         // ...
       })
       .catch((error) => {
         setloading(false);
         const errorCode = error.code;
-        const errorMessage = error.message;
         switch (errorCode) {
           case "auth/invalid-email":
             toast.error("Wrong Email");

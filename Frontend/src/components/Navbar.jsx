@@ -21,16 +21,23 @@ import LogIn from "../assets/log-in.png";
 import LogOut from "../assets/logout.png";
 import DarkMode from "./DarkMode";
 // @ts-ignore
-import AddProduct from "../assets/add-to-cart.png";
+import NonProfilePic from "../assets/NonProfilePic.jpg";
 import SignIn from "../Pages/Auth/SignIn/SignIn";
 import SignUp from "../Pages/Auth/SignUp/SignUp";
 import Search from "./Search";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../config/firebase";
+import ErrorPage from "../Pages/Error/ErrorPage";
+import { signOut } from "firebase/auth";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const [MenuPosition, setMenuPosition] = useState("");
   const [Model, setModel] = useState("hidden");
   const [SignUpModel, setSignUpModel] = useState("hidden");
+  const [user, loading, error] = useAuthState(auth);
 
   /**
    Sets the state of the Sign In Model to "hidden", closing the modal.
@@ -125,6 +132,17 @@ export default function Navbar() {
     };
   }, []);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full !animate-spin bg-[--background-Loader]"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <ErrorPage />;
+  }
   return (
     <div className=" relative  ">
       <header className="bg-transparent absolute top-2 left-0 w-full z-50  px-4 sm:px-6 lg:px-8 shadow-2xl">
@@ -178,7 +196,7 @@ export default function Navbar() {
                   </li>
 
                   <li>
-    <Search/>
+                    <Search />
                   </li>
                 </ul>
               </nav>
@@ -189,34 +207,65 @@ export default function Navbar() {
                 <DarkMode />
               </div>
 
-              <div className="hidden md:block  min-w-5 sm:pr-2">
-                <a
-                  className=" rounded-lg bg-violet-600 px-5 py-2.5 text-sm font-medium text-white hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-violet-300 dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800"
-                  href="/AddMovie"
-                >
-                  Add Products
-                </a>
-              </div>
-
               <div className="flex items-center gap-4">
                 {/* Login and Register for Big Screens */}
-                <div className="sm:flex sm:gap-4">
-                  <div
-                    className=" hidden md:block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-                    onClick={ModelOpener}
-                  >
-                    Login
-                  </div>
-
-                  <div className="hidden sm:flex">
+                {!user && (
+                  <div className="sm:flex sm:gap-4">
                     <div
-                      className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-white cursor-pointer  hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-                      onClick={SignUpModelOpener}
+                      className=" hidden md:block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                      onClick={ModelOpener}
                     >
-                      Register
+                      Login
+                    </div>
+
+                    <div className="hidden sm:flex">
+                      <div
+                        className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-white cursor-pointer  hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                        onClick={SignUpModelOpener}
+                      >
+                        Register
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
+
+                {user && (
+                  <div className="sm:flex sm:gap-4">
+                    <div
+                      className=" hidden md:block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                      onClick={() => {
+                        signOut(auth)
+                          .then(() => {
+                            toast.success("Logged Out Successfully");
+                          })
+                          .catch((error) => {
+                            toast.error(error.message);
+                          });
+                      }}
+                    >
+                      Log Out
+                    </div>
+                  </div>
+                )}
+
+                {user && (
+                  <div className="hidden md:flex sm:gap-4">
+                    <a
+                      rel="noopener noreferrer"
+                      href="/Profile"
+                      className="flex items-center p-2 space-x-3 rounded-md  bg-[--background-Card-log]"
+                    >
+                      {" "}
+                      <img
+                        width={20}
+                        src={Settings}
+                        alt="Search"
+                        className=" "
+                      />
+                      <span>Settings</span>
+                    </a>
+                  </div>
+                )}
 
                 {/* Mobile Toggle Button */}
 
@@ -260,41 +309,9 @@ export default function Navbar() {
                           />
                         </div>
 
-                        {/* <div className="relative">
-                          <span className="absolute inset-y-0 left-0 flex items-center py-4">
-                            <img
-                              width={35}
-                              src={search}
-                              alt="Search"
-                              className="p-2 "
-                            />
-                          </span>
-                          <input
-                            type="search"
-                            name="Search"
-                            placeholder="Search..."
-                            className="w-full py-2 pl-10 text-sm rounded-md focus:outline-none"
-                          />
-                        </div> */}
-                      <Search/>
+                        <Search />
                         <div className="flex-1">
                           <ul className="pt-2 pb-4 space-y-1 text-sm">
-                            <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
-                              <a
-                                rel="noopener noreferrer"
-                                href="#"
-                                className="flex items-center p-2 space-x-3 rounded-md  "
-                              >
-                                <img
-                                  width={25}
-                                  src={AddProduct}
-                                  alt="AddProduct"
-                                  className=" "
-                                />
-                                <span>Add Product</span>
-                              </a>
-                            </li>
-
                             <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
                               <a
                                 rel="noopener noreferrer"
@@ -414,70 +431,104 @@ export default function Navbar() {
                               </details>
                             </li>
 
-                            <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
-                              <a
-                                rel="noopener noreferrer"
-                                href="#"
-                                className="flex items-center p-2 space-x-3 rounded-md  "
-                              >
-                                {" "}
-                                <img
-                                  width={25}
-                                  src={Settings}
-                                  alt="Search"
-                                  className=" "
-                                />
-                                <span>Settings</span>
-                              </a>
-                            </li>
-                            <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
-                              <a
-                                rel="noopener noreferrer"
-                                href="/SignOut"
-                                className="flex items-center p-2 space-x-3 rounded-md  "
-                              >
-                                <img
-                                  width={25}
-                                  src={LogOut}
-                                  alt="Search"
-                                  className=" "
-                                />
-                                <span>Logout</span>
-                              </a>
-                            </li>
+                            {user && (
+                              <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
+                                <a
+                                  rel="noopener noreferrer"
+                                  href="/Profile"
+                                  className="flex items-center p-2 space-x-3 rounded-md  "
+                                >
+                                  {" "}
+                                  <img
+                                    width={25}
+                                    src={Settings}
+                                    alt="Search"
+                                    className=" "
+                                  />
+                                  <span>Settings</span>
+                                </a>
+                              </li>
+                            )}
 
-                            <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
-                              <a
-                                rel="noopener noreferrer"
-                                href="/SignIn"
-                                className="flex items-center p-2 space-x-3 rounded-md  "
-                              >
-                                <img
-                                  width={25}
-                                  src={LogIn}
-                                  alt="Search"
-                                  className=" "
-                                />
-                                <span>LogIn</span>
-                              </a>
-                            </li>
+                            {user && (
+                              <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
+                                <div
+                                  rel="noopener noreferrer"
+                                  className="flex items-center p-2 space-x-3 rounded-md  "
+                                  onClick={() => {
+                                    signOut(auth)
+                                      .then(() => {
+                                        toast.success(
+                                          "Logged Out Successfully"
+                                        );
+                                      })
+                                      .catch((error) => {
+                                        toast.error(error.message);
+                                      });
+                                  }}
+                                >
+                                  <img
+                                    width={25}
+                                    src={LogOut}
+                                    alt="Search"
+                                    className=" "
+                                  />
+                                  <span>Logout</span>
+                                </div>
+                              </li>
+                            )}
+
+                            {!user && (
+                              <li className="rounded-lg hover:bg-gray-100 hover:text-gray-900 text-[--text-color] hover:font-semibold">
+                                <div
+                                  rel="noopener noreferrer"
+                                  className="flex items-center p-2 space-x-3 rounded-md  "
+                                  onClick={ModelOpener}
+                                >
+                                  <img
+                                    width={25}
+                                    src={LogIn}
+                                    alt="Search"
+                                    className=" "
+                                  />
+                                  <span>LogIn</span>
+                                </div>
+                              </li>
+                            )}
                           </ul>
                         </div>
                       </div>
-                      <div className="sticky bottom-0">
-                        <div className=" inset-x-0 flex items-center p-2 mt-28 space-x-4 justify-self-end rounded-lg">
-                          <img
-                            src="https://source.unsplash.com/100x100/?portrait"
-                            alt=""
-                            className="w-12 h-12 rounded-xlg dark:bg-gray-500"
-                          />
-                          <div>
-                            <h2 className="text-lg font-semibold text-[--text-color]">
-                              Leroy Jenkins
-                            </h2>
+                      {user ? (
+                        <div className="sticky bottom-0 border-t-2">
+                          <div className=" inset-x-0 flex items-center p-2  space-x-4 justify-self-end rounded-lg">
+                            <img
+                              src={user.photoURL}
+                              alt={user.displayName}
+                              className="w-12 h-12 rounded-full object-cover dark:bg-gray-500"
+                            />
+                            <div>
+                              <h2 className="text-lg font-semibold text-[--text-color]">
+                                {user.displayName}
+                              </h2>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      ) : (
+                        <div className="sticky bottom-0 border-t-2">
+                          <div className=" inset-x-0 flex items-center p-2  space-x-4 justify-self-end rounded-lg">
+                            <img
+                              src={NonProfilePic}
+                              alt=""
+                              className="w-12 h-12 rounded-full object-cover dark:bg-gray-500"
+                            />
+                            <div>
+                              <h2 className="text-lg font-semibold text-[--text-color]">
+                                Please Sign In to see your profile
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

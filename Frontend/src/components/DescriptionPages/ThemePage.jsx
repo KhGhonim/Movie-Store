@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 
 
 
 export default function ThemePage({ result }) {
+  console.log(result);
   const releaseDatee = result.first_air_date
     ? new Date(result.first_air_date).getFullYear()
     : null;
@@ -50,10 +52,12 @@ export default function ThemePage({ result }) {
               )}
             </div>
             <p className="text-white text-lg max-sm:text-sm opacity-75">{result.overview }</p>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 mt-3">
+              <Link to={`/trending/${result.id}`}>
               <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">
                 Watch Trailer
               </button>
+              </Link>
               <button className="px-4 py-2 text-white border border-white rounded-md hover:border-gray-300">
                 Add to List
               </button>
@@ -73,6 +77,8 @@ export default function ThemePage({ result }) {
     </main>
   );
 }
+
+
 ThemePage.propTypes = {
   result: PropTypes.string.isRequired,
 };

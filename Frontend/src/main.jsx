@@ -24,6 +24,7 @@ import CatagoryDescription from "../src/components/CatagoryPage/CatagoryDescript
 import DiscoverMovies from "../src/Pages/Discover/DiscoverMovies.jsx";
 import DiscoverSeries from "../src/Pages/Discover/DiscoverSeries.jsx";
 import PersonPage from "../src/Pages/PersonPage.jsx";
+import Profile from "../src/Pages/Profile.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route index element={<LandingPage />} />
       <Route path="/AddMovie" element={<AddMovie />} />
       <Route path="/DiscoverMovies" element={<DiscoverMovies />} />
+      <Route path="/Profile" element={<Profile />} />
       <Route path="/DiscoverSeries" element={<DiscoverSeries />} />
       <Route path="PersonDiscover/:personId" element={<PersonPage />} />
       <Route path="/SignUp" element={<SignUp />} />

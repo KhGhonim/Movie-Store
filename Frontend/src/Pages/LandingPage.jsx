@@ -1,9 +1,9 @@
-import Testimonials from "../components/SecoundCrosuel";
-import Banner from "../components/FristCrousel";
+import SecoundCrosuel from "../components/SecoundCrosuel";
+import FristCrousel from "../components/FristCrousel";
 import Footer from "../components/Footer";
 import HeroSection from "../components/HeroSection";
 import Navbar from "../components/Navbar";
-import TopBooks from "../components/Catagories";
+import Catagories from "../components/Catagories";
 import { Helmet } from "react-helmet-async";
 import { ToastContainer } from "react-toastify";
 
@@ -15,9 +15,9 @@ export default function LandingPage() {
       </Helmet>
       <Navbar />
       <HeroSection />
-      <Banner />
-      <TopBooks />
-      <Testimonials />
+      <FristCrousel />
+      <Catagories />
+      <SecoundCrosuel />
       <Footer />
       <ToastContainer />
     </div>

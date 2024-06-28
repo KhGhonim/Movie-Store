@@ -9,7 +9,8 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../../../config/firebase";
+import { auth, storage } from "../../../config/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export default function SignUp({
   SignUpModelCloser,
@@ -19,12 +20,11 @@ export default function SignUp({
 }) {
   const [fristname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
-  const [image, setimage] = useState("");
+  const [image, setimage] = useState(null);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [loading, setloading] = useState(false);
 
-  console.log(image);
   const SignUPref = useRef(null);
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function SignUp({
   //   }
   // };
 
-  const HandleSubmit = (eo) => {
+  const HandleSubmit = async (eo) => {
     eo.preventDefault();
     setloading(true);
     if (!email || !password) {
@@ -87,18 +87,23 @@ export default function SignUp({
       toast.error("Please fill all the fields");
       return;
     }
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
         // Signed up
         const user = userCredential.user;
+        console.log(user);
         sendEmailVerification(auth.currentUser).then(() => {
           //
           toast.success("Signed Up Successfully & Email Verification sent");
         });
-        updateProfile(auth.currentUser, {
-          displayName: fristname,
-          photoURL: image,
+        const storageRef = ref(storage, `profileImages/${user.uid}`);
+        await uploadBytes(storageRef, image);
+        const photoURL = await getDownloadURL(storageRef);
 
+        // Update user profile
+        await updateProfile(user, {
+          displayName: `${fristname} ${lastname}`,
+          photoURL: photoURL,
         });
         ModelOpener();
         SignUpModelCloser();
@@ -112,9 +117,9 @@ export default function SignUp({
           case "auth/invalid-email":
             toast.error("Wrong Email");
             break;
-            case "auth/weak-password":
-              toast.error("Password should be at least 6 characters");
-              break;
+          case "auth/weak-password":
+            toast.error("Password should be at least 6 characters");
+            break;
 
           case "auth/user-not-found":
             toast.error("Wrong Email");
@@ -127,8 +132,6 @@ export default function SignUp({
           case "auth/too-many-requests":
             toast.error("Too many requests, please try aganin later");
             break;
-
-
         }
         // ..
       });
@@ -177,7 +180,6 @@ export default function SignUp({
                   <input
                     type="file"
                     name="image"
-                    value={""}
                     id="image"
                     onChange={(eo) => setimage(eo.target.files[0])}
                     className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500  dark:text-white text-sm rounded-full block  p-2.5  "

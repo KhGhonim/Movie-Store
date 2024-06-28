@@ -16,6 +16,10 @@
   --background-Card-Search: rgb(32,35,55);
   --text-colorForCatagory: #be160a;
 
+  --background-Loader: rgb(91 33 182);
+
+
+
 }
 
 /* Dark Mode Variables */
@@ -29,6 +33,7 @@
   --background-Card-log: rgb(91 33 182);
   --background-Card-Search: rgb(32,35,55);
   --background-Search: rgb(12,15,33);
+  --background-Loader: #ffffff;
 }
 
 
