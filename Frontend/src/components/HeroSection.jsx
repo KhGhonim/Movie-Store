@@ -8,10 +8,18 @@ import "./styles.css";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // @ts-ignore
-import video from '../../src/assets/video-file.png'
+import video from "../../src/assets/video-file.png";
+import { auth, db } from "../config/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 export default function HeroSection() {
+  const [user, loading] = useAuthState(auth);
+
   const [Data, setData] = useState([]);
+
   useEffect(() => {
     const fetchTrending = async () => {
       const options = {
@@ -36,7 +44,7 @@ export default function HeroSection() {
 
     fetchTrending();
   }, []);
-  if (!Data || Data.length === 0) {
+  if (!Data || Data.length === 0 || loading) {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600"></div>
@@ -56,7 +64,6 @@ export default function HeroSection() {
     // Return the original text if it is not longer than the maximum length
     return text;
   };
-
 
   return (
     <div className="relative   bg-gray-900  !overflow-hidden ">
@@ -109,7 +116,35 @@ export default function HeroSection() {
               </div>
 
               <div className="flex justify-center items-center ">
-                <div className="button-container relative inline-block">
+                <div
+                  onClick={async () => {
+                    if (!user) {
+                      toast.error("You must be logged in");
+                      return;
+                    }
+
+                    try {
+                      const itemData = {
+                        id: item.id,
+                        poster_path: item.poster_path,
+                        title: item.title || item.original_name,
+                        media_type: item.media_type,
+                      };
+
+                      await setDoc(
+                        doc(db, user.uid, item.id.toString()),
+                        itemData
+                      );
+
+                      toast.success(
+                        `Added ${item.title || item.original_name} to FAV!`
+                      );
+                    } catch (error) {
+                      toast.error(error.message);
+                    }
+                  }}
+                  className="button-container relative inline-block"
+                >
                   <button className="border border-gray-200 p-3 m-4 rounded-3xl cursor-pointer bg-transparent backdrop-blur-sm relative overflow-hidden text-white gap-10">
                     Add to your FAV
                   </button>
@@ -164,8 +199,8 @@ export default function HeroSection() {
                 </p>
                 {item.overview.length > 100 && (
                   <Link
-                  to={`/trending/${item.id}`}
-                  className="text-blue-500 hover:text-blue-700"
+                    to={`/trending/${item.id}`}
+                    className="text-blue-500 hover:text-blue-700"
                   >
                     Show more
                   </Link>
@@ -174,20 +209,44 @@ export default function HeroSection() {
 
               <div className="flex flex-col  justify-center items-center space-y-3">
                 <div className="button-container relative inline-block">
-                  <button className="border border-gray-200 p-2  rounded-3xl cursor-pointer bg-transparent backdrop-blur-sm text-white">
+                  <button 
+                  
+                  onClick={async () => {
+                    if (!user) {
+                      toast.error("You must be logged in");
+                      return;
+                    }
+
+                    try {
+                      const itemData = {
+                        id: item.id,
+                        poster_path: item.poster_path,
+                        title: item.title || item.original_name,
+                        media_type: item.media_type,
+                      };
+
+                      await setDoc(
+                        doc(db, user.uid, item.id.toString()),
+                        itemData
+                      );
+
+                      toast.success(
+                        `Added ${item.title || item.original_name} to FAV!`
+                      );
+                    } catch (error) {
+                      toast.error(error.message);
+                    }
+                  }}
+                  className="border border-gray-200 p-2  rounded-3xl cursor-pointer bg-transparent backdrop-blur-sm text-white">
                     Add to your FAV
                   </button>
                 </div>
                 <Link
-                    to={`/trending/${item.id}`}
-                    className="flex justify-center items-center border border-gray-200 p-2  rounded-3xl cursor-pointer bg-red-600 transition duration-700 ease-in-out hover:bg-red-900 text-white space-x-2"
+                  to={`/trending/${item.id}`}
+                  className="flex justify-center items-center border border-gray-200 p-2  rounded-3xl cursor-pointer bg-red-600 transition duration-700 ease-in-out hover:bg-red-900 text-white space-x-2"
                 >
                   <button>Watch and download</button>
-                  <img
-                    src={video}
-                    className="!w-5 h-5"
-                    alt="Video File"
-                  />
+                  <img src={video} className="!w-5 h-5" alt="Video File" />
                 </Link>
               </div>
             </div>

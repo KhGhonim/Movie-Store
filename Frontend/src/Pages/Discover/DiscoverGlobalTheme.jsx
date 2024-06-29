@@ -25,13 +25,13 @@ export default function DiscoverGlobalTheme({ result }) {
 
   return (
     <div>
-      <main className="h-full bg-[--background-color] w-full relative flex justify-center items-center flex-wrap py-16">
+      <main className="h-full !bg-[--background-color] w-full relative flex justify-center items-center flex-wrap py-16">
         {result.map((item) => {
           if (!item.poster_path && !item.backdrop_path) return null;
 
           return (
             <div key={item.id}>
-              <div className="w-72 h-[500px] overflow-hidden  p-5 rounded-lg shadow-md hover:shadow-xl border hover:border-[--text-colorForCatagory] transition-all ease-in-out duration-500 dark:bg-gray-50 dark:text-gray-900 mt-5 cursor-pointer m-2">
+              <div className="w-72 h-[500px] overflow-hidden  p-5 rounded-lg shadow-md hover:shadow-xl border hover:border-[--text-colorForCatagory] transition-all ease-in-out duration-500 bg-gray-200 mt-5 cursor-pointer m-2">
                 <img
                   src={`https://image.tmdb.org/t/p/original${
                     item.poster_path || item.backdrop_path

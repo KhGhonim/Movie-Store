@@ -5,7 +5,6 @@ import HeroSection from "../components/HeroSection";
 import Navbar from "../components/Navbar";
 import Catagories from "../components/Catagories";
 import { Helmet } from "react-helmet-async";
-import { ToastContainer } from "react-toastify";
 
 export default function LandingPage() {
   return (
@@ -19,7 +18,6 @@ export default function LandingPage() {
       <Catagories />
       <SecoundCrosuel />
       <Footer />
-      <ToastContainer />
     </div>
   );
 }

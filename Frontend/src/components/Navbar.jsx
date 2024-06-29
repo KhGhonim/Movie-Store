@@ -31,6 +31,7 @@ import ErrorPage from "../Pages/Error/ErrorPage";
 import { signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import WatchList from "./WatchList";
 
 export default function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -82,6 +83,7 @@ export default function Navbar() {
   const HandleMenu = () => {
     setShowMenu((prev) => !prev);
   };
+
   const ref = useRef(null);
   const toggleButtonRef = useRef(null);
   const MyMenuRef = useRef(null);
@@ -206,6 +208,10 @@ export default function Navbar() {
               <div>
                 <DarkMode />
               </div>
+
+        {user && (
+            <WatchList />
+        )}
 
               <div className="flex items-center gap-4">
                 {/* Login and Register for Big Screens */}
