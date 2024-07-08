@@ -1,0 +1,18 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/" },
+    { "source": "/AddMovie", "destination": "/AddMovie" },
+    { "source": "/DiscoverMovies", "destination": "/DiscoverMovies" },
+    { "source": "/Profile", "destination": "/Profile" },
+    { "source": "/DiscoverSeries", "destination": "/DiscoverSeries" },
+    { "source": "/PersonDiscover/:personId", "destination": "/PersonDiscover/:personId" },
+    { "source": "/SignUp", "destination": "/SignUp" },
+    { "source": "/SignIn", "destination": "/SignIn" },
+    { "source": "/movies/:movieId", "destination": "/movies/:movieId" },
+    { "source": "/tv/:tvId", "destination": "/tv/:tvId" },
+    { "source": "/catagories/:movieId", "destination": "/catagories/:movieId" },
+    { "source": "/trending/:movieId", "destination": "/trending/:movieId" },
+    { "source": "/catagories/:movieId/:trending", "destination": "/catagories/:movieId/:trending" },
+    { "source": "/(.*)", "destination": "/ErrorPage" }
+  ]
+}
