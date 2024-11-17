@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* Light Mode Variables */
+:root {
+  --text-color: #ffffff; /* Deep blue-gray for modern, readable text */
+  --text-colorForCatagory: #e63946; /* Vibrant coral red for emphasis */
+  --background-Card-Color: #ffffff; /* Pure white for card backgrounds */
+  --background-Menu: #f8f9fa; /* Very light gray for a clean menu */
+  --background-color: rgb(48, 10, 109);
+  --background-Card-log: rgb(91 33 182);
+  --background-Card-Search: rgb(32,35,55);
+  --background-Search: rgb(12,15,33);
+  --background-Loader: #ffffff;
+}
+
+
+
+/* Dark Mode Variables */
+
+.dark {
+  --text-color: #e2e8f0; /* Soft white for comfortable readability */
+  --text-colorForCatagory: #90cdf4; /* Light blue for emphasis */
+  --background-Card-Color: #2d3748; /* Neutral dark gray for cards */
+  --background-Menu: #1a202c; /* Deep gray for a clean dark menu */
+  --background-color: #1a202c; /* Deep gray for the main background */
+  --background-Card-log: #4a5568; /* Slightly lighter gray for cards to stand out */
+  --background-Card-Search: #2d3748; /* Dark gray for search card */
+  --background-Search: #1a202c; /* Deep gray to blend with the dark mode theme */
+  --background-Loader: #90cdf4; /* Soft blue for loader to match theme highlights */
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+.bungee-spice-regular {
+  font-family: "Bungee Spice", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.custom-gradient {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.005) 70%, rgb(0, 0, 0) 100%);
+  mix-blend-mode: multiply;
+}
+
+.back-gradient {
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.233) 70%, rgb(0, 0, 0) 100%);
+  mix-blend-mode: multiply;
+}
+
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.13) 70%, rgb(0, 0, 0) 100%); /* Adjust gradient colors and transition point */
+  z-index: 1;
+  mix-blend-mode: multiply; /* Creates a blending effect with the image */
+}
+
+
+
+
+
+.card-gradient {
+  background: rgb(2,0,36);
+  background: radial-gradient(circle, rgba(2,0,36,1) 51%, rgba(9,9,121,1) 100%);
+  
+}
+
+.button-container button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  animation: blimp 1s infinite;
+  backdrop-filter: blur(10px);
+}
+
+.button-container button:hover::after {
+  opacity: 1;
+}
+
+.lds-roller,
+.lds-roller div,
+.lds-roller div:after {
+  box-sizing: border-box;
+}
+
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 24px; /* Adjusted width to fit within the button */
+  height: 24px; /* Adjusted height to fit within the button */
+}
+
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 12px 12px; /* Adjusted origin to match new size */
+}
+
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 4px; /* Adjusted width to fit new size */
+  height: 4px; /* Adjusted height to fit new size */
+  border-radius: 50%;
+  background: white;
+  margin: -2px 0 0 -2px; /* Adjusted margin to match new size */
+}
+
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 22px;
+  left: 22px;
+}
+
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 24px;
+  left: 18px;
+}
+
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 25px;
+  left: 14px;
+}
+
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 26px;
+  left: 10px;
+}
+
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 25px;
+  left: 6px;
+}
+
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 24px;
+  left: 2px;
+}
+
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 22px;
+  left: -2px;
+}
+
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 18px;
+  left: -6px;
+}
+
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+
