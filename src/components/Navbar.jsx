@@ -299,7 +299,7 @@ export default function Navbar() {
                   >
                     <div
                       ref={ref}
-                      className="relative flex flex-col  h-full  p-3 w-60 bg-[--background-Menu] dark:text-gray-800 rounded-lg z-50"
+                      className="relative flex flex-col  h-full  p-3 w-60 bg-[--background-color] dark:text-gray-800 rounded-lg z-50"
                     >
                       <div className="space-y-3 flex-1">
                         <div className="flex items-center justify-between text-[--text-color] font-bold">

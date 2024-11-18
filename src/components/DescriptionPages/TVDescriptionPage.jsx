@@ -32,7 +32,6 @@ export default function TVDescriptionPage() {
     DataFetching();
   }, [tvId]);
 
-  console.log(TvDescription);
 
 
   if (!TvDescription || TvDescription.length === 0) {

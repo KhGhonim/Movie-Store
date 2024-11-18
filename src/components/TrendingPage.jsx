@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Youtube from "./CatagoryPage/Youtube";
 import { FaSpinner } from "react-icons/fa";
+import NoMovieFound from "./NoMovieFound";
 
 export default function TrendingPage() {
   const [TrendingPage, setTrendingPage] = useState(null);
@@ -42,9 +43,18 @@ export default function TrendingPage() {
       </div>
     );
   }
+  if (
+    TrendingPage.status_message ===
+    "The resource you requested could not be found."
+  ) {
+    return <NoMovieFound />;
+  }
 
   const releaseData = new Date(TrendingPage.release_date).getFullYear();
-  console.log(TrendingPage);
+  const imageUrl =
+    `https://image.tmdb.org/t/p/original${TrendingPage?.backdrop_path} ` ||
+    `https://image.tmdb.org/t/p/original${TrendingPage?.poster_path} ` ||
+    "https://placeit-img-1-p.cdn.aws.placeit.net/uploads/stage/stage_image/14650/optimized_large_thumb_stage.jpg";
   return (
     <div>
       <Navbar />
@@ -52,9 +62,7 @@ export default function TrendingPage() {
       <div className="relative w-full h-full overflow-hidden bg-gradient-to-b from-gray-900 via-black to-gray-900  py-10">
         {/* Background Image */}
         <img
-          src={`https://image.tmdb.org/t/p/original${
-            TrendingPage?.poster_path || TrendingPage?.backdrop_path
-          }`}
+          src={imageUrl}
           alt={TrendingPage?.original_title}
           className="absolute inset-0 w-full h-full object-cover opacity-30"
         />
@@ -122,7 +130,10 @@ export default function TrendingPage() {
                       Production Companies:{" "}
                     </span>
                     {TrendingPage?.production_companies.map((item) => (
-                      <span key={item.name} className="inline-block mr-2 text-xs">
+                      <span
+                        key={item.name}
+                        className="inline-block mr-2 text-xs"
+                      >
                         {item.name},
                       </span>
                     ))}
@@ -229,16 +240,18 @@ export default function TrendingPage() {
               >
                 {TrendingPage.reviews && (
                   <div className="space-y-6">
-                  {TrendingPage?.reviews?.map((review) => (
-                    <div
-                      key={review.id}
-                      className="p-4 border border-gray-700 rounded-md bg-gray-800 text-gray-300"
-                    >
-                      <p className="font-medium text-white">{review.author}</p>
-                      <p className="mt-2">{review.content}</p>
-                    </div>
-                  ))}
-                </div>
+                    {TrendingPage?.reviews?.map((review) => (
+                      <div
+                        key={review.id}
+                        className="p-4 border border-gray-700 rounded-md bg-gray-800 text-gray-300"
+                      >
+                        <p className="font-medium text-white">
+                          {review.author}
+                        </p>
+                        <p className="mt-2">{review.content}</p>
+                      </div>
+                    ))}
+                  </div>
                 )}
 
                 {!TrendingPage.reviews && (
