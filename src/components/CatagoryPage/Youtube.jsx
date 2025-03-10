@@ -10,9 +10,11 @@ export default function Youtube() {
   }${movieId}/videos?language=en-US`;
   const ApiKey = import.meta.env.VITE_APP_API_Authorization;
   const { Data } = useApi(ApiURL, ApiKey);
+
+  console.log(Data)
   return (
     <>
-      {Data && Data.results ? (
+      {Data && Data.length > 0 ? (
         <div className="flex justify-center max-w-7xl h-96 flex-col  items-center space-y-6">
           {" "}
           <ReactPlayer
