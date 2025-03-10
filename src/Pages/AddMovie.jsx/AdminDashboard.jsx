@@ -32,7 +32,7 @@ export default function AdminDashboard() {
       method: "POST",
       body: formData,
     });
-    
+
     if (!response.ok) {
       toast.warning("Prdoucts did not add product");
     } else {
@@ -43,14 +43,13 @@ export default function AdminDashboard() {
   };
 
   return (
-    
     <div className="  h-full ">
       <section className="relative flex flex-wrap lg:h-screen lg:items-center">
         <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-lg text-center">
             <h1 className="text-2xl font-bold sm:text-3xl">
-            Add some new Products into Our inventory today!
-          </h1>
+              Add some new Products into Our inventory today!
+            </h1>
 
             <p className="mt-4 text-gray-500">
               Please note that your need add other products to your inventory
@@ -91,7 +90,7 @@ export default function AdminDashboard() {
 
             <div>
               <label htmlFor="name" className="sr-only">
-              type
+                type
               </label>
 
               <div className="relative">
@@ -171,7 +170,7 @@ export default function AdminDashboard() {
 
             <div>
               <label htmlFor="Fake price" className="sr-only">
-              Episode Number
+                Episode Number
               </label>
 
               <div className="relative">

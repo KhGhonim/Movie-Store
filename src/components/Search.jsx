@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // @ts-ignore
 import SearchBar from "../assets/searchbar.png";
 import { Link } from "react-router-dom";
@@ -27,9 +27,23 @@ export default function Search() {
       .then((response) => setSearchResults(response))
       .catch((err) => console.error(err));
   }, [Query]);
+  const ref = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsExpanded(false);
+        setQuery("");
+        setSearchResults(null);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="relative flex items-center">
+    <div ref={ref} className="relative flex items-center">
       <input
         type="text"
         name="search"
@@ -40,24 +54,17 @@ export default function Search() {
             : "w-0 p-0 overflow-hidden"
         }`}
         placeholder="Search..."
-        onFocus={() => setIsExpanded(true)}
-        onBlur={() => setIsExpanded(false)}
-        
         onChange={(eo) => {
           let value = eo.target.value;
           setQuery(value);
         }}
       />
       <button
-        className="absolute left-1 top-1/2 transform -translate-y-1/2 border border-transparent p-1 bg-transparent hover:bg-gray-50 rounded-lg"
+        className="absolute z-40 left-1 top-1/2 transform -translate-y-1/2 border border-transparent p-1 bg-transparent hover:bg-gray-50 rounded-lg"
         aria-label="Search Icon"
         onClick={() => setIsExpanded(true)}
       >
-        <img
-          src={SearchBar} // Make sure SearchBarIcon is a valid import or URL
-          alt="Search"
-          className="w-6 h-6"
-        />
+        <img src={SearchBar} alt="Search" className="w-6 h-6" />
       </button>
 
       <div className="absolute  top-full left-0 mt-1 w-full  bg-[--background-color] rounded-lg z-10 max-h-[400px] overflow-y-auto">

@@ -1,12 +1,8 @@
-import SecoundCrosuel from "../components/SecoundCrosuel";
-import FristCrousel from "../components/FristCrousel";
-import Footer from "../components/Footer";
 import HeroSection from "../components/HeroSection";
-import Navbar from "../components/Navbar";
 import Catagories from "../components/Catagories";
 import { Helmet } from "react-helmet-async";
 import AdsBanner from "../components/AdsBanner/AdsBanner";
-import ThirdCrousel from "../components/ThirdCrousel";
+import CrouselTemplate from "../components/CrouselTemplate";
 
 export default function LandingPage() {
   return (
@@ -14,14 +10,40 @@ export default function LandingPage() {
       <Helmet>
         <title>KG Movie Store</title>
       </Helmet>
-      <Navbar />
       <HeroSection />
-      <FristCrousel />
+      <CrouselTemplate
+        Title="Popular Movies"
+        ApiURL={import.meta.env.VITE_APP_Movie_API}
+        ApiKey={import.meta.env.VITE_APP_API_Authorization}
+        type="movies"
+      />
       <Catagories />
-      <SecoundCrosuel />
-      <AdsBanner/>
-      <ThirdCrousel />
-      <Footer />
+      <CrouselTemplate
+        Title="Trend TV Shows"
+        ApiURL={import.meta.env.VITE_APP_TV_API}
+        ApiKey={import.meta.env.VITE_APP_API_Authorization}
+        type="tv"
+      />
+      <CrouselTemplate
+        Title="Top Rated Movies"
+        ApiURL={import.meta.env.VITE_APP_Movie_TopRated_API}
+        ApiKey={import.meta.env.VITE_APP_API_Authorization}
+        type="movies"
+      />
+      <AdsBanner />
+      <CrouselTemplate
+        Title="Top Rated TV"
+        ApiURL={import.meta.env.VITE_APP_TV_TopRated_API}
+        ApiKey={import.meta.env.VITE_APP_API_Authorization}
+        type="tv"
+      />
+
+      <CrouselTemplate
+        Title="Upcoming Movies"
+        ApiURL={import.meta.env.VITE_APP_Upcoming_API}
+        ApiKey={import.meta.env.VITE_APP_API_Authorization}
+        type="movies"
+      />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import menubar from "../assets/menu-bar.png";
 import Close from "../assets/cross.png";
 // @ts-ignore
 import house from "../assets/house.png";
+import Logo from "../assets/Kogo.png";
 
 // @ts-ignore
 import Series from "../assets/drama.png";
@@ -148,29 +149,22 @@ export default function Navbar() {
   }
   return (
     <div className=" relative  ">
-      <header className="bg-transparent absolute top-2 left-0 w-full z-50  px-4 sm:px-6 lg:px-8 shadow-2xl">
+      <header className="bg-transparent absolute top-2 left-0 right-0 w-full z-30  px-4 sm:px-6 lg:px-8">
         <div className="">
           <div className="flex h-16 items-center justify-between">
             {/* logo */}
 
             <div className="flex items-center justify-between gap-2 md:gap-5">
               <div className="flex  items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-[--background-Card-log] ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 32 32"
-                  fill="currentColor"
-                  className="flex-shrink-0 w-4 h-4 md:w-6 md:h-6 rounded-full dark:text-gray-50"
-                >
-                  <path d="M18.266 26.068l7.839-7.854 4.469 4.479c1.859 1.859 1.859 4.875 0 6.734l-1.104 1.104c-1.859 1.865-4.875 1.865-6.734 0zM30.563 2.531l-1.109-1.104c-1.859-1.859-4.875-1.859-6.734 0l-6.719 6.734-6.734-6.734c-1.859-1.859-4.875-1.859-6.734 0l-1.104 1.104c-1.859 1.859-1.859 4.875 0 6.734l6.734 6.734-6.734 6.734c-1.859 1.859-1.859 4.875 0 6.734l1.104 1.104c1.859 1.859 4.875 1.859 6.734 0l21.307-21.307c1.859-1.859 1.859-4.875 0-6.734z"></path>
-                </svg>
+                <img src={Logo} className="w-6 h-6 md:w-8 md:h-8 " />
               </div>
               <a
-                className="block text-white font-semibold text-sm md:text-xl "
+                className="block text-white font-semibold text-lg md:text-4xl "
                 href="/"
               >
                 <h1>
                   KG
-                  <span className="text-red-500 ml-2">Movie Store</span>{" "}
+                  <span className="text-red-500">Movie</span>{" "}
                 </h1>
               </a>
             </div>
@@ -182,19 +176,19 @@ export default function Navbar() {
                 <ul className="flex items-center gap-6 text-sm">
                   <li>
                     <a
-                      className="text-white  hover:text-red-500 transition-all duration-500 ease-out font-semibold text-lg"
+                      className="text-white  hover:text-red-500 transition-all duration-500 ease-out font-semibold text-xl"
                       href="/DiscoverMovies"
                     >
-                      Filtered Movies
+                      Movies
                     </a>
                   </li>
 
                   <li>
                     <a
-                      className="text-white  hover:text-red-500 transition-all duration-500 ease-out font-semibold text-lg"
+                      className="text-white  hover:text-red-500 transition-all duration-500 ease-out font-semibold text-xl"
                       href="/DiscoverSeries"
                     >
-                      Filtered Series
+                      Series
                     </a>
                   </li>
 
@@ -210,9 +204,7 @@ export default function Navbar() {
                 <DarkMode />
               </div>
 
-        {user && (
-            <WatchList />
-        )}
+              {user && <WatchList />}
 
               <div className="flex items-center gap-4">
                 {/* Login and Register for Big Screens */}
@@ -227,7 +219,7 @@ export default function Navbar() {
 
                     <div className="hidden sm:flex">
                       <div
-                        className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-white cursor-pointer  hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                        className="rounded-md bg-[--background-Card-log] px-5 py-2.5 text-sm font-medium text-white cursor-pointer  hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-gray-300 "
                         onClick={SignUpModelOpener}
                       >
                         Register

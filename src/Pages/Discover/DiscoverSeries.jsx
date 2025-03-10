@@ -1,4 +1,3 @@
-import Navbar from "../../components/Navbar";
 import Drawer from "../../components/CatagoryPage/Drawer";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -12,10 +11,14 @@ export default function DiscoverMovies() {
   const language = searchParams.get("language");
   const type = searchParams.get("type");
 
-
-
   useEffect(() => {
-    const fetchDiscoverMoives = async (year, rating, language, type, page=1) => {
+    const fetchDiscoverMoives = async (
+      year,
+      rating,
+      language,
+      type,
+      page = 1
+    ) => {
       const options = {
         method: "GET",
         headers: {
@@ -54,13 +57,12 @@ export default function DiscoverMovies() {
     });
   }, [year, rate, language, type]);
 
-
   return (
     <div>
-      <Navbar />
-      <DiscoverGlobalTheme 
-// @ts-ignore
-      result={DiscoverSeries}/>
+      <DiscoverGlobalTheme
+        // @ts-ignore
+        result={DiscoverSeries}
+      />
       <div className="fixed bottom-0 left-0 ">
         <Drawer />
       </div>

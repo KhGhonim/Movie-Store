@@ -6,12 +6,10 @@ import { sendEmailVerification } from "firebase/auth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaSpinner } from "react-icons/fa";
-import Navbar from "../components/Navbar";
 
 export default function Profile() {
   const [user, error, loading] = useAuthState(auth);
   const navigate = useNavigate();
-  console.log(user);
   const handleEmailVerification = () => {
     sendEmailVerification(auth.currentUser)
       .then(() => {
@@ -44,7 +42,6 @@ export default function Profile() {
 
   return (
     <>
-      <Navbar />
       <div className="min-h-screen bg-[--background-color] py-24 px-4 md:px-8">
         {/* If email is not verified */}
         {!user.emailVerified && (

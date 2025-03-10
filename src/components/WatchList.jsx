@@ -27,7 +27,7 @@ export default function WatchList() {
     <div  className="relative flex flex-col items-center justify-center">
       {/* Watchlist Button */}
       <div
-        className="hidden md:flex items-center gap-2 rounded-md bg-[--background-Card-log] px-6 py-2 text-base font-medium text-white shadow-lg hover:bg-indigo-600 cursor-pointer transition-all duration-300 ease-in-out"
+        className="hidden md:flex items-center gap-2 rounded-md bg-[--background-Card-log] px-6 py-2 text-base font-medium text-white shadow-lg cursor-pointer transition-all duration-300 ease-in-out"
         onClick={ModelWatchListOpener}
       >
         WatchList

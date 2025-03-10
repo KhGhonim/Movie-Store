@@ -45,7 +45,6 @@ export default function CatagoryDescription() {
 
   return (
     <div>
-      <Navbar />
       <div className="relative min-h-screen bg-gradient-to-t from-black via-gray-900 to-black text-white">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0">

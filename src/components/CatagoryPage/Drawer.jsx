@@ -54,8 +54,6 @@ export default function Drawer() {
     });
   };
 
-
-
   useEffect(() => {
     // Event handler for clicking outside the SignUp modal
     const HandleModelCloser = (eo) => {
@@ -74,7 +72,6 @@ export default function Drawer() {
       document.removeEventListener("mousedown", HandleModelCloser);
     };
   }, []);
-
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 20 }, (_, index) => currentYear - index);
@@ -106,9 +103,9 @@ export default function Drawer() {
     <div>
       {CloseDrawer ? (
         <aside
-          className={` fixed inset-y-0  block transition-transform duration-300 ease-in-out ${
+          className={` fixed inset-0 bg-black   transition-all opacity-100 duration-300 ease-in-out ${
             isDrawerOpen ? "translate-x-0" : "-translate-x-full"
-          }  p-5 w-64 md:w-80 h-dvh  bg-[--background-Search]   rounded-2xl`}
+          }  p-5 w-64 md:w-80 h-dvh !z-50   bg-[--background-Search]   rounded-2xl`}
           ref={ref}
         >
           {/* Drawer Handle */}
@@ -117,7 +114,7 @@ export default function Drawer() {
             onClick={handleDrawer}
           >
             <div className="w-4 h-4 transition-transform duration-300 rounded-xl">
-              {isDrawerOpen ? <FaArrowRight /> : <FaArrowLeft />}
+              {isDrawerOpen ? <FaArrowLeft /> : <FaArrowRight />}
             </div>
           </div>
 

@@ -68,7 +68,6 @@ export default function CatagoryPage() {
 
   return (
     <div>
-      <Navbar />
       <main className="min-h-full w-full bg-[--background-color] relative">
         <div className="fixed inset-0 z-0">
           <img

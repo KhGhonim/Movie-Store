@@ -40,45 +40,6 @@ export default function SignUp({
     };
   }, [SignUpModel]);
 
-  // {Signup with Nodejs and express auth}
-
-  // const HandleSubmit = async (eo) => {
-  //   eo.preventDefault();
-  //   setloading(true);
-  //   if (!fristname || !lastname || !email || !password) {
-  //     setloading(false);
-  //     toast.error("Please fill all the fields");
-  //     return;
-  //   }
-
-  //   const formData = new FormData();
-  //   formData.append("fristname", fristname);
-  //   formData.append("lastname", lastname);
-  //   formData.append("email", email);
-  //   formData.append("password", password);
-  //   if (image) {
-  //     formData.append("image", image); // Check if image exists before appending
-  //   }
-
-  //   try {
-  //     const response = await fetch("http://localhost:6969/api/auth/signup", {
-  //       method: "POST",
-  //       body: formData,
-  //     });
-  //     const result = await response.json();
-  //     console.log(result);
-  //     eo.target.reset();
-  //     setloading(false);
-  //     toast.success("Signed Up Successfully");
-  //     SignUpModelCloser();
-  //     ModelOpener();
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     toast.error("Error while signing up");
-  //     setloading(false);
-  //   }
-  // };
-
   const HandleSubmit = async (eo) => {
     eo.preventDefault();
     setloading(true);
@@ -91,9 +52,7 @@ export default function SignUp({
       .then(async (userCredential) => {
         // Signed up
         const user = userCredential.user;
-        console.log(user);
         sendEmailVerification(auth.currentUser).then(() => {
-          //
           toast.success("Signed Up Successfully & Email Verification sent");
         });
         const storageRef = ref(storage, `profileImages/${user.uid}`);
