@@ -10,19 +10,19 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import LandingPage from "./Pages/LandingPage.jsx";
 import ErrorPage from "./Pages/Error/ErrorPage.jsx";
 import SignIn from "./Pages/Auth/SignIn/SignIn.jsx";
 import SignUp from "./Pages/Auth/SignUp/SignUp.jsx";
 import CatagoryPage from "../src/components/CatagoryPage/CatagoryPage.jsx";
 import MovieDescriptionPage from "../src/components/DescriptionPages/MovieDescriptionPage.jsx";
 import TVDescriptionPage from "../src/components/DescriptionPages/TVDescriptionPage.jsx";
-import TrendingPage from "../src/components/TrendingPage.jsx";
 import CatagoryDescription from "../src/components/CatagoryPage/CatagoryDescription.jsx";
 import DiscoverMovies from "../src/Pages/Discover/DiscoverMovies.jsx";
 import DiscoverSeries from "../src/Pages/Discover/DiscoverSeries.jsx";
 import PersonPage from "../src/Pages/PersonPage.jsx";
 import Profile from "../src/Pages/Profile.jsx";
+import TrendingPage from "./Pages/TrendingPage/TrendingPage.jsx";
+import LandingPage from "./Pages/LandingPage/LandingPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

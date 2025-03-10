@@ -11,7 +11,7 @@ export default function Youtube() {
   const ApiKey = import.meta.env.VITE_APP_API_Authorization;
   const { Data } = useApi(ApiURL, ApiKey);
   return (
-    <div>
+    <>
       {Data && Data.results ? (
         <div className="flex justify-center max-w-7xl h-96 flex-col  items-center space-y-6">
           {" "}
@@ -28,7 +28,7 @@ export default function Youtube() {
           <span>There is no trailer!</span>
         </div>
       )}
-    </div>
+    </>
   );
 }
 Youtube.propTypes = {

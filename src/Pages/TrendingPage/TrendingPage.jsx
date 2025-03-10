@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
-import Youtube from "./CatagoryPage/Youtube";
+import Youtube from "../../components/CatagoryPage/Youtube";
+import Cast from "../../components/Cast";
+import NoMovieFound from "../../components/NoMovieFound";
+import SimilerWorks from "../../components/SimilerWorks";
+import { useApi } from "../../Hooks/ApiRequest";
 import { FaSpinner } from "react-icons/fa";
-import NoMovieFound from "./NoMovieFound";
-import { useApi } from "../Hooks/ApiRequest";
-import Cast from "./Cast";
-import SimilerWorks from "./SimilerWorks";
+import { useParams } from "react-router-dom";
 
 export default function TrendingPage() {
   const { movieId } = useParams();

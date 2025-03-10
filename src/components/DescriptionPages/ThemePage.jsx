@@ -5,6 +5,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cast from "../../components/Cast";
+import TrailerPlayer from "../../components/TrailerPlayer";
+import { useState } from "react";
 ThemePage.propTypes = {
   result: PropTypes.object.isRequired,
 };
@@ -13,6 +15,28 @@ export default function ThemePage({ result }) {
   const releaseDatee = result.first_air_date
     ? new Date(result.first_air_date).getFullYear()
     : null;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleAddToFavorites = async (item) => {
+    if (!user) {
+      toast.error("You must be logged in");
+      return;
+    }
+
+    try {
+      const itemData = {
+        id: item.id,
+        poster_path: item.poster_path,
+        title: item.title || item.original_name,
+        media_type: item.media_type,
+      };
+
+      await setDoc(doc(db, user.uid, item.id.toString()), itemData);
+      toast.success(`Added ${item.title || item.original_name} to FAV!`);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   return (
     <main className="relative min-h-screen w-full bg-[--background-color]">
@@ -77,36 +101,13 @@ export default function ThemePage({ result }) {
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row justify-center md:justify-start items-center space-y-4 sm:space-y-0 sm:space-x-6">
             {/* Watch Trailer Button */}
-            <button className="px-8 py-3 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white font-semibold rounded-full shadow-lg transition-transform transform hover:scale-105">
+            <button onClick={() => setIsOpen(true)} className="px-8 py-3 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white font-semibold rounded-full shadow-lg transition-transform transform hover:scale-105">
               Watch Trailer
             </button>
 
             {/* Add to List Button */}
             <button
-              onClick={async () => {
-                if (!user) {
-                  toast.error("You must be logged in");
-                  return;
-                }
-
-                try {
-                  const itemData = {
-                    id: result.id,
-                    poster_path: result.poster_path,
-                    title: result.title,
-                  };
-
-                  await setDoc(
-                    doc(db, user.uid, result.id.toString()),
-                    itemData
-                  );
-                  toast.success(
-                    `Added ${result.title || result.original_name} to FAV!`
-                  );
-                } catch (error) {
-                  toast.error(error.message);
-                }
-              }}
+              onClick={() => handleAddToFavorites(result)}
               className="px-8 py-3 bg-white text-gray-800 border-2 border-gray-800 rounded-full shadow-lg font-semibold transition-transform transform hover:scale-105 hover:bg-gray-100"
             >
               Add to List
@@ -114,6 +115,8 @@ export default function ThemePage({ result }) {
           </div>
         </div>
       </div>
+
+      <TrailerPlayer isOpen={isOpen} setIsOpen={setIsOpen} />
     </main>
   );
 }

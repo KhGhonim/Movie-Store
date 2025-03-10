@@ -1,8 +1,9 @@
-import HeroSection from "../components/HeroSection";
-import Catagories from "../components/Catagories";
+import AdsBanner from "../../components/AdsBanner/AdsBanner";
+import Catagories from "../../components/Catagories";
+import CrouselTemplate from "../../components/CrouselTemplate";
+import HeroSection from "../../components/HeroSection";
 import { Helmet } from "react-helmet-async";
-import AdsBanner from "../components/AdsBanner/AdsBanner";
-import CrouselTemplate from "../components/CrouselTemplate";
+
 
 export default function LandingPage() {
   return (
