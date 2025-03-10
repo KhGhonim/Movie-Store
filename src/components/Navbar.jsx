@@ -148,18 +148,18 @@ export default function Navbar() {
     return <ErrorPage />;
   }
   return (
-    <div className=" relative  ">
+    <div id="nav" className=" relative  ">
       <header className="bg-transparent absolute top-2 left-0 right-0 w-full z-30  px-4 sm:px-6 lg:px-8">
         <div className="">
           <div className="flex h-16 items-center justify-between">
             {/* logo */}
 
-            <div className="flex items-center justify-between gap-2 md:gap-5">
-              <div className="flex  items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-[--background-Card-log] ">
+            <div className="flex   items-center justify-between gap-2 md:gap-5">
+              <div className="flex   items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-[--background-Card-log] ">
                 <img src={Logo} className="w-6 h-6 md:w-8 md:h-8 " />
               </div>
               <a
-                className="block text-white font-semibold text-lg md:text-4xl "
+                className="block   text-white font-semibold text-lg md:text-4xl "
                 href="/"
               >
                 <h1>

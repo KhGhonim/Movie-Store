@@ -100,12 +100,12 @@ export default function Drawer() {
     }
   };
   return (
-    <div>
+    <div >
       {CloseDrawer ? (
         <aside
           className={` fixed inset-0 bg-black   transition-all opacity-100 duration-300 ease-in-out ${
             isDrawerOpen ? "translate-x-0" : "-translate-x-full"
-          }  p-5 w-64 md:w-80 h-dvh !z-50   bg-[--background-Search]   rounded-2xl`}
+          }  p-5 w-64 md:w-80 h-dvh z-[9999]   bg-[--background-Search]   rounded-2xl`}
           ref={ref}
         >
           {/* Drawer Handle */}

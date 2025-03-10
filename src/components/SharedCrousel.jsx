@@ -19,6 +19,7 @@ Crousel.propTypes = {
 };
 
 export default function Crousel({ result, Page, isLoading }) {
+
   if (isLoading) {
     return (
       <Swiper

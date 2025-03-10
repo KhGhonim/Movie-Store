@@ -1,14 +1,16 @@
-import Navbar from "../../components/Navbar";
 import { useParams } from "react-router-dom";
 import ThemePage from "./ThemePage";
 import { useApi } from "../../Hooks/ApiRequest";
+import { useEffect } from "react";
 
 export default function TVDescriptionPage() {
   const { tvId } = useParams();
   const ApiURL = `${import.meta.env.VITE_APP_TVSearch_API}${tvId}`;
   const ApiKey = import.meta.env.VITE_APP_API_Authorization;
   const { Data } = useApi(ApiURL, ApiKey);
-
+  useEffect(() => {
+    window.top.scrollTo(0, 0);
+  }, []);
   if (!Data || Data.length === 0) {
     return (
       <div className="flex justify-center items-center h-screen">
