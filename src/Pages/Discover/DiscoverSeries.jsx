@@ -10,7 +10,9 @@ export default function DiscoverMovies() {
   const rate = searchParams.get("rate");
   const language = searchParams.get("language");
   const type = searchParams.get("type");
-
+  useEffect(() => {
+    window.top.scrollTo(0, 0);
+  }, []);
   useEffect(() => {
     const fetchDiscoverMoives = async (
       year,
@@ -23,14 +25,15 @@ export default function DiscoverMovies() {
         method: "GET",
         headers: {
           accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZTM0YjVlYjEyMjMxNDlkYTZjYWQ0ZWVhYjU5ZTQ4MiIsInN1YiI6IjY2M2E5ZGQ1M2Q2YmIzYmRhOTI3NmY0ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ABEAo1GkaGt_KMj2AEzEZPB3cTtJrSAzm7Lxh2fHBXc",
+          Authorization: import.meta.env.VITE_APP_API_Authorization,
         },
       };
-      let url = `https://api.themoviedb.org/3/discover/tv?language=${language}&sort_by=popularity.desc&page=${page}`;
+      let url = `${
+        import.meta.env.VITE_APP_Discover_API
+      }?language=${language}&sort_by=popularity.desc&page=${page}`;
 
       if (year) {
-        url += `&primary_release_year=${year}`;
+        url += `&year=${year}`;
       }
 
       if (rating) {
@@ -49,7 +52,7 @@ export default function DiscoverMovies() {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      return data.results.map((movie) => ({ ...movie, media_type: "movie" }));
+      return data.results.map((movie) => ({ ...movie, media_type: "tv" }));
     };
 
     fetchDiscoverMoives(year, rate, language, type).then((data) => {

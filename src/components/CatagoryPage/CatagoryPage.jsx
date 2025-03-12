@@ -1,4 +1,3 @@
-import Navbar from "../../components/Navbar";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 // @ts-ignore
@@ -12,39 +11,14 @@ import Arabic from "../../../src/assets/Movies/Arabic.png";
 // @ts-ignore
 import CatagoryCard from "./CatagoryCard";
 import { FaSpinner } from "react-icons/fa";
+import { useApi } from "../../Hooks/ApiRequest";
 
 export default function CatagoryPage() {
-  const [CatagoryData, setCatagoryData] = useState(null);
   const { movieId } = useParams();
   const [Poster, setPoster] = useState(movieId);
-  // {Change Between True and False}
-
-  useEffect(() => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZmFhZjFiNjhiMTFmNmFjZjUwZmUzYTg3NDJmMGMxNyIsIm5iZiI6MTcxOTE1OTc2Mi4wMjU5MjcsInN1YiI6IjY2Nzg0YTlmMmYzNGVjYmRhNzNiMjI1NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HAl0urrcB3rZpMGmK6DOb1HNwVzZJHwx2-q7LU3J6v0",
-      },
-    };
-
-    const DataFetching = async () => {
-      try {
-        await fetch(
-          `https://api.themoviedb.org/3/search/multi?query=${movieId}`,
-          options
-        )
-          .then((response) => response.json())
-          .then((response) => setCatagoryData(response.results))
-          .catch((err) => console.error(err));
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    DataFetching();
-  }, [movieId]);
-
+  const ApiURL = `${import.meta.env.VITE_APP_SearchQuery_API}${movieId}`;
+  const ApiKey = import.meta.env.VITE_APP_API_Authorization;
+  const { Data } = useApi(ApiURL, ApiKey);
   useEffect(() => {
     if (movieId === "Marvel") {
       setPoster(Marvel);
@@ -58,9 +32,9 @@ export default function CatagoryPage() {
   }, [movieId]);
 
   // @ts-ignore
-  if (!CatagoryData || CatagoryData.length === 0) {
+  if (!Data.results || Data.results.length === 0) {
     return (
-      <div className="flex w-full h-full items-center justify-center">
+      <div className="flex w-full h-dvh items-center justify-center">
         <FaSpinner className="animate-spin" />
       </div>
     );
@@ -92,7 +66,7 @@ export default function CatagoryPage() {
             />
           </div>
 
-          <CatagoryCard CatagoryData={CatagoryData} />
+          <CatagoryCard Data={Data.results} />
         </div>
       </main>
     </div>

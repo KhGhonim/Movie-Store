@@ -17,11 +17,10 @@ const truncateText = (text, maxLength) => {
 };
 
 CatagoryCard.propTypes = {
-  CatagoryData: PropTypes.array.isRequired,
+  Data: PropTypes.array.isRequired,
 };
 
-
-export default function CatagoryCard({ CatagoryData }) {
+export default function CatagoryCard({ Data }) {
   const [currentPage, setcurrentPage] = useState(1);
   /**
    * Number of items to display on each page.   */
@@ -35,13 +34,13 @@ export default function CatagoryCard({ CatagoryData }) {
    */
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   /**
-   * Slice the CatagoryData array to get the items to display on the current page.
+   * Slice the Data array to get the items to display on the current page.
    */
-  const currentItems = CatagoryData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = Data.slice(indexOfFirstItem, indexOfLastItem);
   /**
    * Calculate the total number of pages needed to display all items.
    */
-  const totalPages = Math.ceil(CatagoryData.length / itemsPerPage);
+  const totalPages = Math.ceil(Data.length / itemsPerPage);
 
   /**
    * Increment the current page state by 1, if possible.
@@ -125,4 +124,3 @@ export default function CatagoryCard({ CatagoryData }) {
     </div>
   );
 }
-

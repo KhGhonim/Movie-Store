@@ -11,10 +11,9 @@ export default function Youtube() {
   const ApiKey = import.meta.env.VITE_APP_API_Authorization;
   const { Data } = useApi(ApiURL, ApiKey);
 
-  console.log(Data)
   return (
     <>
-      {Data && Data.length > 0 ? (
+      {Data.results && Data.results.length > 0 ? (
         <div className="flex justify-center max-w-7xl h-96 flex-col  items-center space-y-6">
           {" "}
           <ReactPlayer
